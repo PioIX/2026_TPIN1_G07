@@ -1,6 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
+    background-image: url(PREGUNTADO.jpg);
     font-family: 'Fredoka One', cursive;
     background-color: #5c3d8f;
     height: 100vh;
