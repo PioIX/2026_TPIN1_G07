@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preguntados</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style2.css">
+</head>
+<body>
+  <div class="bg-questions" id="bgQ"></div>
+
+    <!-- Main card -->
+  <div class="card">
+    <div class="title">
+      <h1>Preguntados</h1>
+    </div>
+
+    <div class="tabs">
+      <button class="tab" onclick="switchTab('login', this)">Iniciar Sesion</button>
+      <button class="tab active" onclick="switchTab('register', this)">Registrarse</button>
+    </div>
+
+    <div id="register-form">
+      <p class="subtitle">¡Unite a la Diversión!</p>
+
+      <div class="form-group">
+        <label class="form-label">Tu Nombre:</label>
+        <div class="input-wrapper">
+          <span class="input-icon">👤</span>
+          <input type="text" class="form-input" placeholder="Nombre de Usuario"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Correo Electrónico:</label>
+        <div class="input-wrapper">
+          <span class="input-icon">✉️</span>
+          <input type="email" class="form-input" placeholder="Ej: flavio@gmail.com"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Contraseña:</label>
+        <div class="input-wrapper">
+          <span class="input-icon">🔒</span>
+          <input type="password" class="form-input" placeholder="Mín. 8 caracteres"/>
+        </div>
+      </div>
+
+      <button class="btn-main">Crear Cuenta y Jugar Ya!</button>
+
+      <p class="footer-link">¿Ya tenes cuenta? <a href="#">Inicia Sesion</a></p>
+    </div>
+
+
+
+  <div id="login-form">
+      <p class="subtitle">¡Bienvenido de vuelta!</p>
+
+      <div class="form-group">
+        <label class="form-label">Correo Electrónico:</label>
+        <div class="input-wrapper">
+          <span class="input-icon">✉️</span>
+          <input type="email" class="form-input" placeholder="Ej: flavio@gmail.com"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Contraseña:</label>
+        <div class="input-wrapper">
+          <span class="input-icon">🔒</span>
+          <input type="password" class="form-input" placeholder="Tu contraseña"/>
+        </div>
+      </div>
+
+      <button class="btn-main">¡Jugar!</button>
+
+      <p class="footer-link">¿No tenes cuenta? <a href="#">Registrate</a></p>
+    </div>
+  </div>
+
+<script>
+
+    function switchTab(tab, el) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('register-form').style.display = tab === 'register' ? 'block' : 'none';
+      document.getElementById('login-form').style.display = tab === 'login' ? 'block' : 'none';
+    }
+
+  const container = document.getElementById('bgQ');
+
+ 
+  marks.forEach(p => {
+    const span = document.createElement('span');
+    span.textContent = '?';
+    span.style.top = p.t;
+    span.style.left = p.l;
+    span.style.fontSize = p.s;
+    span.style.transform = `rotate(${p.r})`;
+    span.style.opacity = p.o;
+    container.appendChild(span);
+  });
+
+</script>
+
+</body>
+</html>

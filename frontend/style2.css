@@ -1,0 +1,251 @@
+#login-form {
+    display: none;
+}
+
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --purple-dark: #5a2d8c;
+      --purple-mid: #7b3fb5;
+      --purple-bg: #6a35a0;
+      --card-bg: #c9b8e8;
+      --white: #ffffff;
+      --input-bg: #ffffff;
+      --pink-btn: #e91e8c;
+      --pink-btn-hover: #d01679;
+      --text-dark: #3a1a6e;
+      --text-mid: #5a3a8a;
+      --cyan-link: #00bcd4;
+    }
+
+    body {
+    background-image: url(PREGUNTADO.jpg);
+    font-family: 'Fredoka One', cursive;
+    background-color: #5c3d8f;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+   }
+
+  .bg-questions {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+   }
+   
+   .bg-questions span {
+    position: absolute;
+    color: #6e4fa8;
+    font-family: 'Fredoka One', cursive;
+    font-weight: 900;
+    user-select: none;
+    -webkit-user-select: none; /* Para Safari */
+    -moz-user-select: none;    /* Para Firefox (opcional) */
+    -ms-user-select: none;     /* Para IE/Edge antiguos (opcional) */
+    user-select: none;         /* Para Chrome, Edge, Firefox modernos */
+}
+  
+
+    @keyframes floatQ {
+      0%, 100% { transform: translateY(0px) rotate(-5deg); }
+      50% { transform: translateY(-12px) rotate(5deg); }
+    }
+
+    /* Carta de login*/
+    .card {
+      position: relative;
+      z-index: 10;
+      background: var(--card-bg);
+      border-radius: 24px;
+      border: 3px solid #b09fd4;
+      padding: 36px 44px 32px;
+      width: 480px;
+      max-width: 95vw;
+      box-shadow: 0 8px 40px rgba(60, 20, 100, 0.35);
+      animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1) both;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+
+    /* Title */
+    .title {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+    .title h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 2.6rem;
+      color: var(--white);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 0 var(--purple-dark), 0 0 20px rgba(255,255,255,0.3);
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .tab {
+      flex: 1;
+      padding: 10px 0;
+      border: 2px solid var(--purple-dark);
+      border-radius: 30px;
+      background: transparent;
+      color: var(--text-dark);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .tab:hover { background: rgba(90,45,140,0.1); }
+    .tab.active {
+      background: var(--white);
+      color: var(--text-dark);
+      box-shadow: 0 2px 10px rgba(90,45,140,0.2);
+    }
+
+    /* Subtitle */
+    .subtitle {
+      text-align: center;
+      font-size: 1.45rem;
+      font-weight: 900;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+    }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .input-icon {
+      position: absolute;
+      left: 14px;
+      color: #9880c0;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+    .form-input {
+      width: 100%;
+      padding: 11px 14px 11px 40px;
+      border: 2px solid #c0aee0;
+      border-radius: 10px;
+      background: var(--input-bg);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      color: #666;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-input:focus {
+      border-color: var(--purple-mid);
+      box-shadow: 0 0 0 3px rgba(123, 63, 181, 0.18);
+    }
+    .form-input::placeholder { color: #bbb; }
+
+    /* Button */
+    .btn-main {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      background: var(--pink-btn);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(233, 30, 140, 0.4);
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    }
+    .btn-main:hover {
+      background: var(--pink-btn-hover);
+      box-shadow: 0 6px 24px rgba(233, 30, 140, 0.5);
+      transform: translateY(-1px);
+    }
+    .btn-main:active { transform: translateY(1px); }
+
+    /* Footer link */
+    .footer-link {
+      text-align: center;
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      font-weight: 700;
+    }
+    .footer-link a {
+      color: var(--cyan-link);
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .footer-link a:hover { text-decoration: underline; }
+
+    /* Characters */
+    .characters {
+      position: fixed;
+      bottom: 0;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      pointer-events: none;
+      z-index: 5;
+      padding: 0 2vw;
+    }
+    .char {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      animation: charBounce 3s ease-in-out infinite;
+    }
+    .char:nth-child(2) { animation-delay: 0.5s; }
+    .char:nth-child(3) { animation-delay: 1s; }
+    .char:nth-child(4) { animation-delay: 1.5s; }
+    .char:nth-child(5) { animation-delay: 2s; }
+
+    @keyframes charBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .char-pink   { background: #f48fb1; }
+    .char-green  { background: #a5d6a7; }
+    .char-blue   { background: #81d4fa; }
+    .char-orange { background: #ffab91; }
+    .char-yellow { background: #fff176; }
