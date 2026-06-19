@@ -22,12 +22,12 @@ app.get('/', function (req, res) {
     });
 });
 
-// tabla Usuarios
+// tabla Cursos
 
-app.get('/usuarios', async function (req, res) {
+app.get('/Usuarios', async function (req, res) {
     let respuesta;
     if (req.query.id != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Usuarios WHERE id=${req.query.id}`)
+        respuesta = await realizarQuery(`SELECT * FROM Usuarios WHERE id_usuario=${req.query.id_usuario}`)
     } else {
         respuesta = await realizarQuery("SELECT * FROM Usuarios");
     }
@@ -35,38 +35,36 @@ app.get('/usuarios', async function (req, res) {
 })
 
 
-app.post("/cursos", async function(req,res){
+app.post("/Usuarios", async function(req,res){
     console.log(req.body)
     let respuesta = await realizarQuery(`
-    SELECT * FROM Cursos WHERE nombre="${req.body.nombre}" and profesor = "${req.body.profesor}" and aula="${req.body.aula}";
+    SELECT * FROM Usuarios WHERE nombre="${req.body.nombre}" and mail = "${req.body.mail}" and contraseña="${req.body.contraseña}";
         `)
         if (respuesta.length > 0){
-            res.send({message:"El curso ya existe"})
+            res.send({message:"El usuario ya existe"})
         } else {
-            realizarQuery(`INSERT INTO Cursos(nombre, profesor, aula) VALUES
-             ("${req.body.nombre}","${req.body.profesor}","${req.body.aula}")`)
-            res.send({message:"Curso Agregado"})
+            realizarQuery(`INSERT INTO Usuarios(nombre, mail, contraseña) VALUES
+             ("${req.body.nombre}","${req.body.mail}","${req.body.contraseña}")`)
+            res.send({message:"Usuario Agregado"})
+            }
+})
+
+
+
+app.post("/UsuariosSesion", async function(req,res){
+    console.log(req.body)
+    let respuesta = await realizarQuery(`
+    SELECT * FROM Usuarios WHERE  mail = "${req.body.mail}" and contraseña="${req.body.contraseña}";
+        `)
+        if (respuesta.length > 0){
+            res.send({message:"Inicio de Secion exitoso"})
+        } else {
+            res.send({message:"Usuario no existe"})
             }
 })
 
 
 
 
-
-app.put("/cursos", async function(req,res){
-    console.log(req.body)
-    await realizarQuery(`
-    UPDATE Cursos SET nombre="${req.body.nombre}"
-    WHERE id= ${req.body.id};`
-    )
-    res.send("Curso Actualizado")
-})
-
-app.delete('/cursos', function (req, res) {
-    console.log(req.body)
-    realizarQuery(` DELETE FROM Cursos WHERE id=${req.body.id};`
-    )
-    res.send("Curso eliminado")
-})
 
 
