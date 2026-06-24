@@ -57,10 +57,20 @@ app.post("/UsuariosSesion", async function(req,res){
     SELECT * FROM Usuarios WHERE  mail = "${req.body.mail}" and contraseña="${req.body.contraseña}";
         `)
         if (respuesta.length > 0){
-            res.send({message:"Inicio de Secion exitoso"})
+            res.send({message:"Inicio de Sesion exitoso"})
         } else {
             res.send({message:"Usuario no existe"})
             }
+})
+
+app.get("/preguntas", async function name(req, res) {
+    try {
+        let res = await realizarQuery("");
+    
+        res.send({preguntas: res[0]})
+    } catch (error) {
+        res.send({message: error.message, preguntas: -1})
+    }
 })
 
 
