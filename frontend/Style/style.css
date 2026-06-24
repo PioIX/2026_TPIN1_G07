@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background-image: url(PREGUNTADO.jpg);
+    background-image: url(PREGUNTADOS\ \(1\).jpg);
     font-family: 'Fredoka One', cursive;
     background-color: #5c3d8f;
     height: 100vh;
@@ -42,7 +42,7 @@
     z-index: 10;
   }
 
-  .btn-start {
+  .Comenzar{
     margin-top: 60px;
     background: #f7318e;
     color: #fff;
@@ -91,5 +91,41 @@
   .arch:nth-child(5) { background: #2dd4bf; transform: rotate(-6deg) translateY(10px); transform-origin: bottom center; }
 
 
+.personaje {
+  position:absolute;
+  bottom:0;
+  z-index:10;
+}
+
+.popi {
+  left:-40px;
+  width:150px;
+}
+
+
+.hector {
+  left:170px;
+  width:180px;
+  bottom:7px;
+}
+
+
+.tony {
+  left:370px;
+  width:150px;
+}
+
+
+.albert {
+  left:570px;
+  width:150px;
+}
+
+
+.tito {
+  right: -20px;
+  width:150px;
+}
+  
 
   

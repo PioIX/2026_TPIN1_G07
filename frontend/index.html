@@ -5,17 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Preguntados</title>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="Style/style.css">
 </head>
 <body>
-
   <div class="bg-questions" id="bgQ"></div>
 
   <h1 class="title">PREGUNTADOS</h1>
 
-  <a href="index2.html">
-    <button class="btn-start"> COMENZAR </button>
-  </a>
+  <a href="indexRegistro.html" class="Comenzar"> COMENZAR</a>
+
 
   <div class="bottom-scene">
     <div class="arch"></div>
@@ -23,23 +21,15 @@
     <div class="arch"></div>
     <div class="arch"></div>
     <div class="arch"></div>
-  </div>
+ 
 
-  <script>
-    const container = document.getElementById('bgQ');
+  <img src="Style/PopiArtes.png" class="personaje popi">
+  <img src="Style/HectorHistoria.png" class="personaje hector">
+  <img src="Style/TonyDeportes.png" class="personaje tony">
+  <img src="Style/AlbertCiencia.png" class="personaje albert">
+  <img src="Style/TitoGeografia.png" class="personaje tito">
+   </div>
 
-    
 
-    marks.forEach(p => {
-      const span = document.createElement('span');
-      span.textContent = '?';
-      span.style.top = p.t;
-      span.style.left = p.l;
-      span.style.fontSize = p.s;
-      span.style.transform = `rotate(${p.r})`;
-      span.style.opacity = p.o;
-      container.appendChild(span);
-    });
-  </script>
 </body>
 </html>
