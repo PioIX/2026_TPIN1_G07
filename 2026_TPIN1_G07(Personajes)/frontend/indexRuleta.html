@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruleta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="Style/style3.css">
+</head>
+
+
+    <body>
+
+        
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="contenedor-principal">
+
+        <!-- RULETA -->
+        <div class="ruleta-wrapper">
+
+            <!-- FLECHA -->
+            <div class="ruleta-flecha"></div>
+
+            <!-- BORDE EXTERIOR -->
+            <div class="ruleta-borde">
+
+                <!-- DISCO DE LA RULETA -->
+                <div class="ruleta-disco" id="ruleta">
+
+                    <!-- ICONOS DE LAS CATEGORÍAS -->
+
+                    <!-- HISTORIA -->
+                    <img src="Style/HISTORIA-.png"
+                         alt="HISTORIA"
+                         class="icono i1">
+
+                    <!-- DEPORTE -->
+                    <img src="Style/DEPORTES-.png"
+                         alt="DEPORTE"
+                         class="icono i2">
+
+                    <!-- CINE -->
+                    <img src="Style/CINE-.png"
+                         alt="CINE"
+                         class="icono i3">
+
+                    <!-- BONUS -->
+                    <img src="Style/BONUS-.png"
+                         alt="BONUS"
+                         class="icono i4">
+
+                    <!-- CIENCIA -->
+                    <img src="Style/CIENCIA-.png"
+                         alt="Ciencia"
+                         class="icono i5">
+                    <!-- Entretenimiento -->
+                    <img src="Style/GEOGRAFIA-.png"
+                        alt="Geografía"
+                        class="icono i6">
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- BOTÓN Y PERSONAJE -->
+        <div class="zona-boton">
+
+            <!-- PERSONAJE -->
+            <img src="Style/Personaje Pr Rosa.png"
+                 alt="Personaje"
+                 class="personaje">
+
+            <!-- BOTÓN -->
+            <button class="btn-pulsar"
+                    id="btnGirar" 
+                    onclick="girarRuleta()">
+
+                PULSA AQUÍ
+
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+       let gradosActuales = 0;
+        const ruleta = document.getElementById("ruleta");
+        const boton = document.getElementById("btnGirar");
+
+        function girarRuleta() {
+            // Deshabilitar botón temporalmente para evitar bugs mientras gira
+            boton.disabled = true;
+
+            // Generar entre 5 y 9 vueltas completas + un ángulo extra aleatorio
+            const vueltas = Math.floor(Math.random() * 5) + 5;
+            const gradosExtra = Math.floor(Math.random() * 360);
+
+            // Sumar al acumulador para que mantenga la inercia del giro anterior
+            gradosActuales += (vueltas * 360) + gradosExtra;
+
+            // Ejecutar animación CSS
+            ruleta.style.transform = `rotate(${gradosActuales}deg)`;
+        }
+
+        // Este evento se dispara automáticamente al completarse la animación de 4 segundos
+        ruleta.addEventListener('transitionend', () => {
+            // Volver a habilitar el botón
+            boton.disabled = false;
+
+            // Obtener el residuo exacto entre 0° y 359°
+            let anguloFinal = gradosActuales % 360;
+            let categoriaGanadora = "";
+
+            // Evaluar los sectores basándonos en tu diseño original
+            if (anguloFinal >= 0 && anguloFinal < 60) {
+                categoriaGanadora = "Geografía";
+            } else if (anguloFinal >= 60 && anguloFinal < 120) {
+                categoriaGanadora = "Ciencia";
+            } else if (anguloFinal >= 120 && anguloFinal < 180) {
+                categoriaGanadora = "Bonus";
+            } else if (anguloFinal >= 180 && anguloFinal < 240) {
+                categoriaGanadora = "Arte";
+            } else if (anguloFinal >= 240 && anguloFinal < 300) {
+                categoriaGanadora = "Deporte";
+            } else if (anguloFinal >= 300 && anguloFinal < 360) {
+                categoriaGanadora = "Historia";
+            }
+
+            console.log("Resultado matemático de detención: " + anguloFinal + "°");
+            confirm("¡Te tocó: " + categoriaGanadora + "!")
+            window.location.href =categoriaGanadora.toLocaleLowerCase() + ".html";
+        });
+    </script>
+
+    </body>
+</html>
