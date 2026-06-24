@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>APP Web</title>
+        <link rel="stylesheet" href="style.css">    
+    </head>
+    <body onload="llenarTabla()">
+        <style> table, th, td{
+        border: 1px solid black;
+        }</style>
+    <table style="width: 100%;">
+        <tr>
+            <th>Nombre</th>
+            <th>Profesor</th>
+            <th>Aula</th>
+        </tr>
+        <tbody id="tabla-contenido">
+
+        </tbody>
+    </table>
+
+        <h1 id="BaseDatos"> Baso de Datos </h1>
+        <button onclick="llamadoAlGet()">Llamado Al Backend</button>
+
+        <h2>Agregar un Curos nuevo</h2>
+        <input id="ingresoNombre" placeholder="Ingrese el nombre">
+        <input id="ingresoProfesor" placeholder="Ingrese la profesor">
+        <input id="ingresoAula" placeholder="Ingrese Aula" >
+        <button onclick="tomarDatos()">Enviar al POST</button>
+
+        <h2>Eliminar Registro</h2>
+        <label for="selector-datos">Selecciona un elemento:</label>
+        <select id="selector-datos">
+            <option value="">Seleccione Dato</option>
+        </select>
+
+        <button onclick="borrarDatos()">Eliminar de la base de datos</button>
+
+
+        <h2>Cambiar Registro</h2>
+        <label for="selector-datos2">Selecciona un elemento:</label>
+        <select id="selector-datos2">
+            <option value="">Seleccione Dato</option>
+        </select>
+
+        <input type="text" id="botonInputNombre" placeholder="Escribe NOMBRE ha cambiar...">
+        <input type="text" id="botonInputProfesor" placeholder="Escribe PROFESOR ha cambiar...">
+        <input type="text" id="botonInputAula" placeholder="Escribe AULA ha cambiar...">
+        <button onclick="cambiarDato()">Enviar</button>
+
+
+
+    <script src="dom.js"></script>
+    <script src="index.js"> </script>
+    </body>
+</html>

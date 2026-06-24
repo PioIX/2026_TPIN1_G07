@@ -17,3 +17,16 @@ function getMailS(){
 function getContraseñaS(){
     return document.getElementById("ingreseContraseña").value
 }
+
+// DOM DE ADMIN
+function ingresoNombre() {
+    return document.getElementById("ingresoNombre").value
+}
+
+function ingresoProfesor() {
+    return document.getElementById("ingresoProfesor").value
+}
+
+function ingresoAula() {
+    return document.getElementById("ingresoAula").value
+}

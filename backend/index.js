@@ -49,8 +49,6 @@ app.post("/Usuarios", async function(req,res){
             }
 })
 
-
-
 app.post("/UsuariosSesion", async function(req,res){
     console.log(req.body)
     let respuesta = await realizarQuery(`
@@ -72,6 +70,64 @@ app.get("/preguntas", async function name(req, res) {
         res.send({message: error.message, preguntas: -1})
     }
 })
+
+
+//FUNCIONES DE ADMIN
+
+app.get('/cursos', async function(req,res){
+    let respuesta;
+    if (req.query.id != undefined) {
+        respuesta = await realizarQuery(`SELECT * FROM Cursos WHERE id=${req.query.id}`)
+    } else {
+        respuesta = await realizarQuery("SELECT * FROM Cursos");
+    }    
+    res.send(respuesta);
+})
+
+
+app.post('/cursos', async function(req,res) {
+ console.log(req.body) //Los pedidos post reciben los datos del req.body
+ let existe = []   
+ if (req.body.id != undefined) {
+         existe = await realizarQuery(`
+            SELECT id =${req.body.id} FROM Cursos 
+        `)
+        
+    }
+
+    if (existe.length > 0) {
+        res.send({ message: "Curso ya existe" })
+
+    } else {
+        await realizarQuery(`
+        INSERT INTO Cursos (nombre,profesor,aula) VALUES
+        ("${req.body.nombre}","${req.body.profesor}","${req.body.aula}")
+    `)
+    res.send({ message: "Curso agregado" });
+    }
+})
+
+app.put('/cursos',function(req, res){
+    console.log(req.body)
+    realizarQuery(`
+        UPDATE Cursos SET nombre = "${req.body.nombre}", profesor = "${req.body.profesor}", aula = "${req.body.aula}"
+        WHERE id=${req.body.id}
+     `)
+    res.send({ message: "Curso modificado" })
+
+})
+
+
+app.delete('/cursos', function(req, res){
+    console.log(req.body)
+    realizarQuery(`
+        DELETE FROM Cursos WHERE id = "${req.body.id}"
+     `)
+    res.send({message:"Curso eliminado"})
+
+} )
+
+
 
 
 
