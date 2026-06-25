@@ -19,14 +19,10 @@ function getContraseñaS(){
 }
 
 // DOM DE ADMIN
-function ingresoNombre() {
-    return document.getElementById("ingresoNombre").value
+function ingresoCategorias() {
+    return document.getElementById("ingresoCategorias").value
 }
 
-function ingresoProfesor() {
-    return document.getElementById("ingresoProfesor").value
-}
-
-function ingresoAula() {
-    return document.getElementById("ingresoAula").value
+function ingresoTextoPregunta() {
+    return document.getElementById("ingresoTextoPregunta").value
 }

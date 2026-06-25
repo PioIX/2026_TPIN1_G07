@@ -12,9 +12,8 @@
         }</style>
     <table style="width: 100%;">
         <tr>
-            <th>Nombre</th>
-            <th>Profesor</th>
-            <th>Aula</th>
+            <th>Categoria</th>
+            <th>Texto Pregunta</th>
         </tr>
         <tbody id="tabla-contenido">
 
@@ -24,13 +23,12 @@
         <h1 id="BaseDatos"> Baso de Datos </h1>
         <button onclick="llamadoAlGet()">Llamado Al Backend</button>
 
-        <h2>Agregar un Curos nuevo</h2>
-        <input id="ingresoNombre" placeholder="Ingrese el nombre">
-        <input id="ingresoProfesor" placeholder="Ingrese la profesor">
-        <input id="ingresoAula" placeholder="Ingrese Aula" >
+        <h2>Agregar una pregunta nueva</h2>
+        <input id="ingresoCategorias" placeholder="ingrese Categoria">
+        <input id="ingresoTextoPregunta" placeholder="ingrese Texto Pregunta">
         <button onclick="tomarDatos()">Enviar al POST</button>
 
-        <h2>Eliminar Registro</h2>
+        <h2>Eliminar Pregunta</h2>
         <label for="selector-datos">Selecciona un elemento:</label>
         <select id="selector-datos">
             <option value="">Seleccione Dato</option>
@@ -39,15 +37,14 @@
         <button onclick="borrarDatos()">Eliminar de la base de datos</button>
 
 
-        <h2>Cambiar Registro</h2>
+        <h2>Cambiar una pregunta</h2>
         <label for="selector-datos2">Selecciona un elemento:</label>
         <select id="selector-datos2">
             <option value="">Seleccione Dato</option>
         </select>
 
-        <input type="text" id="botonInputNombre" placeholder="Escribe NOMBRE ha cambiar...">
-        <input type="text" id="botonInputProfesor" placeholder="Escribe PROFESOR ha cambiar...">
-        <input type="text" id="botonInputAula" placeholder="Escribe AULA ha cambiar...">
+        <input type="text" id="botonInputCategorias" placeholder="Escribe CATEGORIA ha cambiar...">
+        <input type="text" id="botonInputTextoregunta" placeholder="Escribe TEXTO DE PREGUNTA ha cambiar...">
         <button onclick="cambiarDato()">Enviar</button>
 
 

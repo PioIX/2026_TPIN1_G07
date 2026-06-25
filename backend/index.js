@@ -61,6 +61,9 @@ app.post("/UsuariosSesion", async function(req,res){
             }
 })
 
+
+
+/*
 app.get("/preguntas", async function name(req, res) {
     try {
         let res = await realizarQuery("");
@@ -74,59 +77,61 @@ app.get("/preguntas", async function name(req, res) {
 
 //FUNCIONES DE ADMIN
 
-app.get('/cursos', async function(req,res){
+app.get('/Preguntas', async function(req,res){
     let respuesta;
-    if (req.query.id != undefined) {
-        respuesta = await realizarQuery(`SELECT * FROM Cursos WHERE id=${req.query.id}`)
+    if (req.query.id_preguntas != undefined) {
+        respuesta = await realizarQuery(`SELECT * FROM Preguntas WHERE id_preguntas=${req.query.id_preguntas}`)
     } else {
-        respuesta = await realizarQuery("SELECT * FROM Cursos");
+        respuesta = await realizarQuery("SELECT * FROM Preguntas");
     }    
     res.send(respuesta);
 })
 
 
-app.post('/cursos', async function(req,res) {
+app.post('/Preguntas', async function(req,res) {
  console.log(req.body) //Los pedidos post reciben los datos del req.body
  let existe = []   
- if (req.body.id != undefined) {
+ if (req.body.id_preguntas != undefined) {
          existe = await realizarQuery(`
-            SELECT id =${req.body.id} FROM Cursos 
+            SELECT id_preguntas =${req.body.id_preguntas} FROM Preguntas 
         `)
         
     }
 
     if (existe.length > 0) {
-        res.send({ message: "Curso ya existe" })
+        res.send({ message: "Pregunta ya existe" })
 
     } else {
         await realizarQuery(`
-        INSERT INTO Cursos (nombre,profesor,aula) VALUES
-        ("${req.body.nombre}","${req.body.profesor}","${req.body.aula}")
+        INSERT INTO Pregunta (categorias,texto_pregunta) VALUES
+        ("${req.body.categorias}","${req.body.texto_pregunta}")
     `)
-    res.send({ message: "Curso agregado" });
+    res.send({ message: "Pregunta agregado" });
     }
 })
 
-app.put('/cursos',function(req, res){
+app.put('/Preguntas',function(req, res){
     console.log(req.body)
     realizarQuery(`
-        UPDATE Cursos SET nombre = "${req.body.nombre}", profesor = "${req.body.profesor}", aula = "${req.body.aula}"
-        WHERE id=${req.body.id}
+        UPDATE Preguntas SET categorias = "${req.body.categorias}", texto_pregunta = "${req.body.texto_pregunta}"
+        WHERE id=${req.body.id_preguntas}
      `)
-    res.send({ message: "Curso modificado" })
+    res.send({ message: "Pregunta modificada" })
 
 })
 
 
-app.delete('/cursos', function(req, res){
+
+app.delete('/Preguntas', function(req, res){
     console.log(req.body)
     realizarQuery(`
-        DELETE FROM Cursos WHERE id = "${req.body.id}"
+        DELETE FROM Preguntas WHERE id_preguntas = "${req.body.id_preguntas}"
      `)
-    res.send({message:"Curso eliminado"})
+    res.send({message:"pregunta eliminado"})
 
 } )
 
+*/
 
 
 
