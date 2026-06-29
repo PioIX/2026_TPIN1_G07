@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="Style/style-arte.css">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body onload="traerPreguntas('Artes')">
     <div class="game-container">
         
         <aside class="sidebar">
@@ -21,7 +21,7 @@
         </aside>
 
         <main class="main-card">
-            <h1 class="question-title">¿PREGUNTA?</h1>
+            <h1 class="question-title" id="pantalla-pregunta">¿PREGUNTA?</h1>
             
             <div class="options-container">
                 <button class="option-btn">OPCION</button>
@@ -36,5 +36,8 @@
         </main>
 
     </div>
+    <script src="index.js"></script>
+    <script src="juego.js"></script>
+    <script src="dom.js"></script>
 </body>
 </html>

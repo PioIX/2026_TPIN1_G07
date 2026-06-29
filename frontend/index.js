@@ -1,3 +1,4 @@
+
 async function llamadoAlGet() {
     //El get no manda body, si quiero mandar parametros lo sumo a la url con el ?
     const response = await fetch('http://localhost:4000/Usuarios', {

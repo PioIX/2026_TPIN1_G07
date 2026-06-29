@@ -1,10 +1,10 @@
-var express = require('express'); 
-var bodyParser = require('body-parser'); 
+var express = require('express');
+var bodyParser = require('body-parser');
 var cors = require('cors');
 const { realizarQuery } = require('./modulos/mysql');
 
-var app = express(); 
-var port = process.env.PORT || 4000; 
+var app = express();
+var port = process.env.PORT || 4000;
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -35,67 +35,69 @@ app.get('/Usuarios', async function (req, res) {
 })
 
 
-app.post("/Usuarios", async function(req,res){
+app.post("/Usuarios", async function (req, res) {
     console.log(req.body)
     let respuesta = await realizarQuery(`
     SELECT * FROM Usuarios WHERE nombre="${req.body.nombre}" and mail = "${req.body.mail}" and contraseña="${req.body.contraseña}";
         `)
-        if (respuesta.length > 0){
-            res.send({message:"El usuario ya existe"})
-        } else {
-            realizarQuery(`INSERT INTO Usuarios(nombre, mail, contraseña) VALUES
+    if (respuesta.length > 0) {
+        res.send({ message: "El usuario ya existe" })
+    } else {
+        realizarQuery(`INSERT INTO Usuarios(nombre, mail, contraseña) VALUES
              ("${req.body.nombre}","${req.body.mail}","${req.body.contraseña}")`)
-            res.send({message:"Usuario Agregado"})
-            }
+        res.send({ message: "Usuario Agregado" })
+    }
 })
 
-app.post("/UsuariosSesion", async function(req,res){
+app.post("/UsuariosSesion", async function (req, res) {
     console.log(req.body)
     let respuesta = await realizarQuery(`
     SELECT * FROM Usuarios WHERE  mail = "${req.body.mail}" and contraseña="${req.body.contraseña}";
         `)
-        if (respuesta.length > 0){
-            res.send({message:"Inicio de Sesion exitoso"})
-        } else {
-            res.send({message:"Usuario no existe"})
-            }
-})
-
-
-
-/*
-app.get("/preguntas", async function name(req, res) {
-    try {
-        let res = await realizarQuery("");
-    
-        res.send({preguntas: res[0]})
-    } catch (error) {
-        res.send({message: error.message, preguntas: -1})
+    if (respuesta.length > 0) {
+        res.send({ message: "Inicio de Sesion exitoso" })
+    } else {
+        res.send({ message: "Usuario no existe" })
     }
 })
 
 
-//FUNCIONES DE ADMIN
+// FUNCION DEL JUEGO 
 
-app.get('/Preguntas', async function(req,res){
+app.get("/preguntasAleatorias", async function name(req, res) {
+    try {
+        if (req.query.categoria != undefined) {
+            let resultado = await realizarQuery(`
+            SELECT * FROM Preguntas WHERE categoria = "${req.query.categoria}"`);
+            let categoria = req.query.categoria;
+            res.send({ preguntas: resultado[0] })
+        } else {
+            res.send({preguntas: [], ok : false})
+        }
+    } catch (error) {
+        res.send({ message: error.message, preguntas: -1 })
+    }
+})
+
+app.get('/preguntas', async function (req, res) {
     let respuesta;
     if (req.query.id_preguntas != undefined) {
         respuesta = await realizarQuery(`SELECT * FROM Preguntas WHERE id_preguntas=${req.query.id_preguntas}`)
     } else {
         respuesta = await realizarQuery("SELECT * FROM Preguntas");
-    }    
+    }
     res.send(respuesta);
 })
 
 
-app.post('/Preguntas', async function(req,res) {
- console.log(req.body) //Los pedidos post reciben los datos del req.body
- let existe = []   
- if (req.body.id_preguntas != undefined) {
-         existe = await realizarQuery(`
+app.post('/preguntas', async function (req, res) {
+    console.log(req.body) //Los pedidos post reciben los datos del req.body
+    let existe = []
+    if (req.body.id_preguntas != undefined) {
+        existe = await realizarQuery(`
             SELECT id_preguntas =${req.body.id_preguntas} FROM Preguntas 
         `)
-        
+
     }
 
     if (existe.length > 0) {
@@ -106,11 +108,11 @@ app.post('/Preguntas', async function(req,res) {
         INSERT INTO Pregunta (categorias,texto_pregunta) VALUES
         ("${req.body.categorias}","${req.body.texto_pregunta}")
     `)
-    res.send({ message: "Pregunta agregado" });
+        res.send({ message: "Pregunta agregado" });
     }
 })
 
-app.put('/Preguntas',function(req, res){
+app.put('/preguntas', function (req, res) {
     console.log(req.body)
     realizarQuery(`
         UPDATE Preguntas SET categorias = "${req.body.categorias}", texto_pregunta = "${req.body.texto_pregunta}"
@@ -122,20 +124,20 @@ app.put('/Preguntas',function(req, res){
 
 
 
-app.delete('/Preguntas', function(req, res){
+app.delete('/preguntas', function (req, res) {
     console.log(req.body)
     realizarQuery(`
         DELETE FROM Preguntas WHERE id_preguntas = "${req.body.id_preguntas}"
      `)
-    res.send({message:"pregunta eliminado"})
+    res.send({ message: "pregunta eliminado" })
 
-} )
+})
 
-*/
-
-
-
-
-
-
-
+app.get("/respuestas", async function (req, res) {
+    let respuesta = [];
+    console.log(req.query)
+    if (req.query.id_preguntas != undefined) {
+        respuesta = await realizarQuery(`SELECT * FROM Respuestas WHERE id_preguntas=${req.query.id_preguntas}`)
+    } 
+    res.send(respuesta);
+})
