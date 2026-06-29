@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
     });
 });
 
-// tabla Cursos
+
 
 app.get('/Usuarios', async function (req, res) {
     let respuesta;
@@ -34,6 +34,7 @@ app.get('/Usuarios', async function (req, res) {
     res.send(respuesta);
 })
 
+// funcion registro
 
 app.post("/Usuarios", async function(req,res){
     console.log(req.body)
@@ -48,6 +49,8 @@ app.post("/Usuarios", async function(req,res){
             res.send({message:"Usuario Agregado"})
             }
 })
+
+// funcion inicio de sesion 
 
 app.post("/UsuariosSesion", async function(req,res){
     console.log(req.body)
