@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
     });
 });
 
-// tabla Cursos
+
 
 app.get('/Usuarios', async function (req, res) {
     let respuesta;
@@ -34,6 +34,7 @@ app.get('/Usuarios', async function (req, res) {
     res.send(respuesta);
 })
 
+// funcion registro
 
 app.post("/Usuarios", async function (req, res) {
     console.log(req.body)
@@ -49,7 +50,13 @@ app.post("/Usuarios", async function (req, res) {
     }
 })
 
+<<<<<<< HEAD
 app.post("/UsuariosSesion", async function (req, res) {
+=======
+// funcion inicio de sesion 
+
+app.post("/UsuariosSesion", async function(req,res){
+>>>>>>> 19dcf0faf0877ba64eca7c053e3cec2bd56b6bd3
     console.log(req.body)
     let respuesta = await realizarQuery(`
     SELECT * FROM Usuarios WHERE  mail = "${req.body.mail}" and contraseña="${req.body.contraseña}";

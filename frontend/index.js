@@ -30,6 +30,16 @@ async function llamadoAlPost(datos) {
     //Desarma el json y lo arma como un objeto
     let result = await response.json()
     console.log(result)
+
+
+    if (result.message === "Usuario Agregado") {
+        alert("Registro exitoso");
+        window.location.href = "indexRuleta.html"; 
+    } else {
+        alert(result.message);
+    }
+    
+
 }
 
 function tomarDatos() {
@@ -39,7 +49,15 @@ function tomarDatos() {
         mail: getMail(),
         contraseña: getContraseña(),
     }
-    llamadoAlPost(datos)
+
+    if (datos.nombre === "" || datos.mail === "" || datos.contraseña === "") {
+        alert("Se necesita completar todos los campos");
+        return;
+    }
+    else{
+        llamadoAlPost(datos)
+
+    }
 }
 
 async function Sesion(datosS) {
@@ -55,6 +73,13 @@ async function Sesion(datosS) {
     //Desarma el json y lo arma como un objeto
     let result = await response.json()
     console.log(result)
+
+    if (result.message === "Inicio de Sesion exitoso") {
+        alert("Bienvenido");
+        window.location.href = "indexRuleta.html"; // Cambia por el nombre de tu página del juego
+    } else {
+        alert("Correo o contraseña incorrectos");
+    }
     
 }
 
@@ -64,7 +89,15 @@ function tomarDatosSesion() {
         mail: getMailS(),
         contraseña: getContraseñaS(),
     }
-    Sesion(datosS)
+    
+    if (datosS.mail === "" || datosS.contraseña === "") {
+        alert("Se necesita completar todos los campos");
+        return;
+    }
+    else{
+        Sesion(datosS)
+    }
+
 }
 
 
