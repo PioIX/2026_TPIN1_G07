@@ -191,6 +191,7 @@ async function borrarDatos() {
     let datos = {
         id:document.getElementById("selector-datos").value,
     }
+    console.log(datos)
         const response = await fetch('http://localhost:4000/Preguntas',{
         method:"DELETE", //GET, POST, PUT o DELETE
         headers: {
@@ -202,7 +203,7 @@ async function borrarDatos() {
     console.log(response)
     let result = await response.json()
     console.log(result)
-    
+    llenarTabla() //Fijarse si actualiza los selects
 }
 
 async function cambiarDato() {

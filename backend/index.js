@@ -137,11 +137,15 @@ app.put('/preguntas', function (req, res) {
 
 
 app.delete('/preguntas', function (req, res) {
-    console.log(req.body)
-    realizarQuery(`
-        DELETE FROM Preguntas WHERE id_preguntas = "${req.body.id_preguntas}"
-     `)
-    res.send({ message: "pregunta eliminada" })
+    try {
+        console.log(req.body)
+        realizarQuery(`
+            DELETE FROM Preguntas WHERE id_preguntas = "${req.body.id}"
+         `)
+        res.send({ message: "pregunta eliminada" })
+    } catch (error) {
+        res.send({ message: error.message, preguntas: -1 })
+    }
 
 })
 
