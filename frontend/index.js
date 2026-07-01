@@ -123,6 +123,7 @@ async function llenarTabla() {
                 <tr>
                 <td>${element.texto_pregunta}</td>
                 <td>${element.categorias}</td>
+                <td>${element.id_preguntas}</td>
                 </tr>
                 `;
                 

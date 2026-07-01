@@ -90,7 +90,7 @@ app.get("/preguntasAleatorias", async function name(req, res) {
 })
 
 
-
+// funciones admin
 app.get('/preguntas', async function (req, res) {
     let respuesta;
     if (req.query.id_preguntas != undefined) {
@@ -117,7 +117,7 @@ app.post('/preguntas', async function (req, res) {
 
     } else {
         await realizarQuery(`
-        INSERT INTO Pregunta (categorias,texto_pregunta) VALUES
+        INSERT INTO Preguntas (categorias,texto_pregunta) VALUES
         ("${req.body.categorias}","${req.body.texto_pregunta}")
     `)
         res.send({ message: "Pregunta agregado" });
@@ -141,7 +141,7 @@ app.delete('/preguntas', function (req, res) {
     realizarQuery(`
         DELETE FROM Preguntas WHERE id_preguntas = "${req.body.id_preguntas}"
      `)
-    res.send({ message: "pregunta eliminado" })
+    res.send({ message: "pregunta eliminada" })
 
 })
 
