@@ -32,7 +32,7 @@ async function iniciarJuegoPorCategoria(categoria) {
     //'datos.preguntas' trae el vector/arreglo de preguntas de MySQL
     //localStorage.setItem("preguntas", vector)
     // Usamos JSON.stringify porque localStorage solo guarda cadenas de texto plano
-        localStorage.setItem("preguntas",json.stringify(vectorPreguntas));
+        localStorage.setItem("preguntas",JSON.stringify(vectorPreguntas));
         // contador de preguntas en 0
         localStorage.setItem("preguntas_respondidas", "0")
         
@@ -56,7 +56,7 @@ async function obtenerRespuestasPorPreguntas(idPregunta){
 
 
 async function mostrarPreguntaAleatoria(){
-    let listaPreguntas = JSON.parse(localStorage.getItem("Preguntas")); 
+    let listaPreguntas = JSON.parse(localStorage.getItem("preguntas"));  //modifique la mayus de preguntas
     let respondidas = parseInt(localStorage.getItem("preguntas_respondidas")) && 0;
 
     if(respondidas === 10){
@@ -99,10 +99,43 @@ async function mostrarPreguntaAleatoria(){
 
     for (let i=0; i<botones.length; i++) {
         let boton = botones[i]
-        boton.textContent = opciones[i].texto_respuesta;
-        boton.onclick(responder(opciones[i].es_correcta))
+        if(botones[i]){
+            boton.textContent = opciones[i].texto_respuesta;
+            boton.style.display = "block";
+            boton.onclick = () => {
+                responder(opciones[i].es_correcta);
+            }
+        }else{
+            boton.style.display = "none";
+        }
+        
     }
 }
 
+
+function responder(esCorrecta) {
+    if(esCorrecta === 1 || esCorrecta === true){
+        alert("¡Correcto! Respondiste correctamente");
+        let respondidas = parseInt(localStorage.getItem("preguntas_respondidas")) || 0;
+        respondidas ++;
+        localStorage.setItem("preguntas_respondidas", respondidas.toString());
+
+        mostrarPreguntaAleatoria();
+    }else{
+        alert("Incorrecto. Intenta de nuevo.");
+        limpiarEfectosJuego();
+        window.location.href = "indexRuleta.html";
+    }
+}
+
+
+
+
+
+function limpiarEfectosJuego() {
+    localStorage.removeItem("preguntas");
+    localStorage.removeItem("preguntas_respondidas");
+    localStorage.removeItem("categoria_actual");
+}
 //Hacer la funcion responder
 //Hacer la funcion limpiarElementos

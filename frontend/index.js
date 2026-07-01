@@ -102,9 +102,9 @@ function tomarDatosSesion() {
 
 
 
-/*
-//ACA EMPIEZA FUCION ADMIN
 
+//ACA EMPIEZA FUCION ADMIN
+/*
 async function llenarTabla() {
         let result = await fetch('http://localhost:4000/Preguntas') 
     let vectorDeDatos = await result.json()
@@ -223,6 +223,6 @@ try {
 }
     
 }
+/*
 
 
-*/
