@@ -4,12 +4,15 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>APP Web</title>
-        <link rel="stylesheet" href="style.css">    
+        <link rel="stylesheet" href="Style/styleAdim.css">    
     </head>
     <body onload="llenarTabla()">
         <style> table, th, td{
         border: 1px solid black;
         }</style>
+
+        <h1>Tabla Preguntas Para Modificar </h1>
+
     <table style="width: 100%;">
         <tr>
             <th>Categoria</th>
@@ -21,12 +24,12 @@
     </table>
 
         <h1 id="BaseDatos"> Baso de Datos </h1>
-        <button onclick="llamadoAlGet()">Llamado Al Backend</button>
+        <button onclick="GetPreguntas()">Llamado Al Backend</button>
 
         <h2>Agregar una pregunta nueva</h2>
         <input id="ingresoCategorias" placeholder="ingrese Categoria">
         <input id="ingresoTextoPregunta" placeholder="ingrese Texto Pregunta">
-        <button onclick="tomarDatos()">Enviar al POST</button>
+        <button onclick="DatosPregunta()">Enviar al POST</button>
 
         <h2>Eliminar Pregunta</h2>
         <label for="selector-datos">Selecciona un elemento:</label>
@@ -51,5 +54,14 @@
 
     <script src="dom.js"></script>
     <script src="index.js"> </script>
+
     </body>
+
+<footer>
+
+    <div class="contenedor-jugar">
+        <a href="indexRuleta.html" class="Jugar">IR AL JUEGO</a>
+    </div>
+
+</footer>
 </html>

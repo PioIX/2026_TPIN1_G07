@@ -76,7 +76,15 @@ async function Sesion(datosS) {
 
     if (result.message === "Inicio de Sesion exitoso") {
         alert("Bienvenido");
-        window.location.href = "indexRuleta.html"; // Cambia por el nombre de tu página del juego
+
+        if (result.es_admin) {
+            // Si es administrador
+            window.location.href = "Admin.html";
+        } else {
+            // Si es usuario común
+            window.location.href = "indexRuleta.html";
+        }
+
     } else {
         alert("Correo o contraseña incorrectos");
     }
@@ -101,12 +109,10 @@ function tomarDatosSesion() {
 }
 
 
-
-
 //ACA EMPIEZA FUCION ADMIN
 /*
 async function llenarTabla() {
-        let result = await fetch('http://localhost:4000/Preguntas') 
+        let result = await fetch('http://localhost:4000/preguntas') 
     let vectorDeDatos = await result.json()
     let elementosLista = ""
     for (let i = 0; i < vectorDeDatos.length; i++) {
@@ -122,9 +128,9 @@ async function llenarTabla() {
     document.getElementById('tabla-contenido').innerHTML = elementosLista
 }
         
-async function llamadoAlGet() {
+async function GetPreguntas() {
     //El get no manda body, si quiero mandar parametros lo sumo a la url con el ?
-    const response = await fetch('http://localhost:4000/Preguntas',{
+    const response = await fetch('http://localhost:4000/preguntas',{
         method:"GET", //GET, POST, PUT oz DELETE
         headers: {
         "Content-Type": "application/json",
@@ -139,7 +145,7 @@ async function llamadoAlGet() {
 
 
 //Los datos en el post se mandan dentro de un objeto 
-async function envioPost(datos) {
+async function PostPreguntas(datos) {
     const response = await fetch('http://localhost:4000/preguntas',{
         method:"POST", //GET, POST, PUT o DELETE
         headers: {
@@ -154,19 +160,19 @@ async function envioPost(datos) {
     console.log(result)
 }
 
-function tomarDatos() {
+function DatosPregunta() {
     let datos = {
         categorias: ingresoCategorias(),
         texto_pregunta: ingresoTextoPregunta(),
     }
-    envioPost(datos)
+    PostPreguntas(datos)
 }
 
 const selector = document.getElementById('selector-datos');
 const selector2 = document.getElementById('selector-datos2');
 async function cargarSelect() {
 try {
-        let result = await fetch('http://localhost:4000/Preguntas') 
+        let result = await fetch('http://localhost:4000/preguntas') 
         let resultado = await result.json()
         selector.innerHTML = '<option value="">Seleccione una pregunta...</option>';
         selector2.innerHTML = '<option value="">Seleccione un pregunta...</option>';
@@ -223,6 +229,4 @@ try {
 }
     
 }
-/*
-
-
+*/
