@@ -50,21 +50,24 @@ app.post("/Usuarios", async function (req, res) {
     }
 })
 
-<<<<<<< HEAD
-app.post("/UsuariosSesion", async function (req, res) {
-=======
+
 // funcion inicio de sesion 
 
 app.post("/UsuariosSesion", async function(req,res){
->>>>>>> 19dcf0faf0877ba64eca7c053e3cec2bd56b6bd3
+
     console.log(req.body)
     let respuesta = await realizarQuery(`
     SELECT * FROM Usuarios WHERE  mail = "${req.body.mail}" and contraseña="${req.body.contraseña}";
         `)
     if (respuesta.length > 0) {
-        res.send({ message: "Inicio de Sesion exitoso" })
+        res.send({
+            message: "Inicio de Sesion exitoso",
+            es_admin: respuesta[0].es_admin
+        });
     } else {
-        res.send({ message: "Usuario no existe" })
+        res.send({
+            message: "Usuario no existe"
+        });
     }
 })
 
@@ -85,6 +88,8 @@ app.get("/preguntasAleatorias", async function name(req, res) {
         res.send({ message: error.message, preguntas: -1 })
     }
 })
+
+
 
 app.get('/preguntas', async function (req, res) {
     let respuesta;
@@ -148,3 +153,4 @@ app.get("/respuestas", async function (req, res) {
     } 
     res.send(respuesta);
 })
+
