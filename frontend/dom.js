@@ -10,6 +10,7 @@ function getContraseña(){
     return document.getElementById("ingreseContraseña").value
 }
 
+//  DOM DE SESION
 function getMailS(){
     return document.getElementById("ingreseMail").value
 }
