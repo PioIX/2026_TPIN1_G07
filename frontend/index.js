@@ -109,8 +109,16 @@ function tomarDatosSesion() {
 }
 
 
+//llenar las tablas:
+function Iniciar() {
+    llenarTabla();
+    llenarTablaPre();
+}
+
+
 
 async function llenarTabla() {
+
         let result = await fetch('http://localhost:4000/preguntas') 
     let vectorDeDatos = await result.json()
     let elementosLista = ""
@@ -127,7 +135,29 @@ async function llenarTabla() {
     }
     document.getElementById('tabla-contenido').innerHTML = elementosLista
 }
-        
+ 
+
+async function llenarTablaPre() {
+
+        let result = await fetch('http://localhost:4000/respuestaTabla') 
+    let vectorDeDatos = await result.json()
+    let elementosLista = ""
+    for (let i = 0; i < vectorDeDatos.length; i++) {
+        const element = vectorDeDatos[i];
+        elementosLista += `
+                <tr>
+                <td>${element.id_respuestas}</td>  
+                <td>${element.texto_respuesta}</td>
+                <td>${element.es_correcta}</td>
+                <td>${element.id_preguntas}</td>                
+                </tr>
+                `;
+                
+    }
+    document.getElementById('tabla-contenido-Preguntas').innerHTML = elementosLista
+}
+
+
 async function GetPreguntas() {
     //El get no manda body, si quiero mandar parametros lo sumo a la url con el ?
     const response = await fetch('http://localhost:4000/preguntas',{

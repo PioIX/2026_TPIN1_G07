@@ -158,3 +158,14 @@ app.get("/respuestas", async function (req, res) {
     res.send(respuesta);
 })
 
+
+
+app.get('/respuestaTabla', async function (req, res) {
+    let respuesta;
+    if (req.query.id_respuestas != undefined) {
+        respuesta = await realizarQuery(`SELECT * FROM Respuestas WHERE id_respuestas=${req.query.id_respuestas}`)
+    } else {
+        respuesta = await realizarQuery("SELECT * FROM Respuestas");
+    }
+    res.send(respuesta);
+})

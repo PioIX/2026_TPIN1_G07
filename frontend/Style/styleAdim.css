@@ -9,6 +9,21 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+#BaseDatos{
+    text-align: center; 
+    color: #ff0095; 
+    margin-bottom: 10px; 
+
+}
+
+#TituloPregunta {
+    text-align: right; 
+    color: #ff0095; 
+    margin-bottom: 10px; 
+
+}
+
+
 h2 {
     color: #ff0095;
     text-align: center;
@@ -88,7 +103,11 @@ body {
     gap: 25px;
 }
 
-h1 { text-align: center; color: #ff0095; margin-bottom: 10px; }
+h1 { 
+    text-align: left; 
+    color: #ff0095; 
+    margin-bottom: 10px; 
+}
 
 .card-container {
     background: rgb(182, 143, 169);
@@ -168,3 +187,16 @@ td { padding: 12px; border-bottom: 1px solid #eee; }
     transition: transform 0.1s, box-shadow 0.1s;
     text-decoration: none;
 }
+
+
+.contenedor-tablas {
+    display: flex;
+    gap: 20px;           /* Espacio entre las tablas */
+    align-items: flex-start;
+}
+
+.tabla {
+    width: 50%;          /* Cada tabla ocupa la mitad */
+    border-collapse: collapse;
+}
+

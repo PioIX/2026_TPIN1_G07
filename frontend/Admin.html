@@ -6,25 +6,39 @@
         <title>APP Web</title>
         <link rel="stylesheet" href="Style/styleAdim.css">    
     </head>
-    <body onload="llenarTabla()">
+    <body onload="Iniciar()">
         <style> table, th, td{
         border: 1px solid black;
         }</style>
 
-        <h1>Tabla Preguntas Para Modificar </h1>
+        <h1>Tabla Preguntas Para Modificar </h1>  
+        <h1 id="TituloPregunta">Tabla Respuestas Para Modificar</h1>
+    
+    <div class="contenedor-tablas">
+        <table style="width: 100%;">
+            <tr>
+                <th>Categoria</th>
+                <th>Texto Pregunta</th>
+                <th>ID</th>
+            </tr>
+            <tbody id="tabla-contenido"></tbody>
 
-    <table style="width: 100%;">
-        <tr>
-            <th>Categoria</th>
-            <th>Texto Pregunta</th>
-            <th>ID</th>
-        </tr>
-        <tbody id="tabla-contenido">
+        </table>
 
-        </tbody>
-    </table>
+        <table style="width: 100%;">
+            <tr>
+                <th>Id_Respuestas</th>
+                <th>Texto Respuestas</th>
+                <th>Es correcto</th>
+                <th>ID</th>
+            </tr>
+            <tbody id="tabla-contenido-Preguntas"></tbody>
+        </table>
 
-        <h1 id="BaseDatos"> Baso de Datos </h1>
+    </div>
+
+
+        <h1 id="BaseDatos"> Base de Datos </h1>
         <button onclick="GetPreguntas()">Llamado Al Backend</button>
 
         <h2>Agregar una pregunta nueva</h2>
