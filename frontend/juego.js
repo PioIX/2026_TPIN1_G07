@@ -57,7 +57,7 @@ async function obtenerRespuestasPorPreguntas(idPregunta){
 
 async function mostrarPreguntaAleatoria(){
     let listaPreguntas = JSON.parse(localStorage.getItem("preguntas"));  //modifique la mayus de preguntas
-    let respondidas = parseInt(localStorage.getItem("preguntas_respondidas")) && 0;
+    let respondidas = parseInt(localStorage.getItem("preguntas_respondidas")) || 0;
 
     if(respondidas === 10){
         alert("Respondiste bien todas las preguntas. Ganaste en esta categoria");
@@ -66,7 +66,7 @@ async function mostrarPreguntaAleatoria(){
         return;
     }
 
-    if((!listaPreguntas) && (listaPreguntas.length === 0)) {
+    if((!listaPreguntas) || (listaPreguntas.length === 0)) {
         alert("¡No quedan más preguntas en esta categoría! Elige otra.");
         limpiarEfectosJuego()
         // Limpiar el localstorage para una partida nueva
@@ -99,7 +99,7 @@ async function mostrarPreguntaAleatoria(){
 
     for (let i=0; i<botones.length; i++) {
         let boton = botones[i]
-        if(botones[i]){
+        if(botones[i] && opciones[i]){
             boton.textContent = opciones[i].texto_respuesta;
             boton.style.display = "block";
             boton.onclick = () => {
@@ -138,4 +138,4 @@ function limpiarEfectosJuego() {
     localStorage.removeItem("categoria_actual");
 }
 //Hacer la funcion responder
-//Hacer la funcion limpiarElementos
+//Hacer la funcion limpiarElementos listo (ver si funciona)

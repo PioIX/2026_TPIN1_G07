@@ -158,3 +158,27 @@ app.get("/respuestas", async function (req, res) {
     res.send(respuesta);
 })
 
+// INDEX JUEGO
+
+app.get("/preguntas", async function(req,res){
+    let respuesta =[];
+    console.log(req.query);
+
+    if(req.query.categoria != undefined){
+        respuesta= await realizarQuery(`SELECT id,categoria, pregunta AS texto_pregunta FROM Preguntas WHERE categoria=${req.query.categoria}`);
+
+    }
+    res.send({preguntas: respuesta})
+})
+
+app.get("/respuestas", async function(req,res){
+    let respuesta = [];
+    console.log(req.query)
+
+    if(req.query.id_preguntas != undefined){
+        
+        respuesta = await realizarQuery(`SELECT id,id_pregunta, respuesta AS texto_pregunta, es_correcta FROM Respuestas WHERE id_pregunta=${req.query.id_preguntas}`);
+
+    }
+    res.send(respuesta);
+}) 

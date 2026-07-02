@@ -34,11 +34,11 @@ async function llamadoAlPost(datos) {
 
     if (result.message === "Usuario Agregado") {
         alert("Registro exitoso");
-        window.location.href = "indexRuleta.html"; 
+        window.location.href = "indexRuleta.html";
     } else {
         alert(result.message);
     }
-    
+
 
 }
 
@@ -54,7 +54,7 @@ function tomarDatos() {
         alert("Se necesita completar todos los campos");
         return;
     }
-    else{
+    else {
         llamadoAlPost(datos)
 
     }
@@ -88,7 +88,7 @@ async function Sesion(datosS) {
     } else {
         alert("Correo o contraseña incorrectos");
     }
-    
+
 }
 
 function tomarDatosSesion() {
@@ -97,12 +97,12 @@ function tomarDatosSesion() {
         mail: getMailS(),
         contraseña: getContraseñaS(),
     }
-    
+
     if (datosS.mail === "" || datosS.contraseña === "") {
         alert("Se necesita completar todos los campos");
         return;
     }
-    else{
+    else {
         Sesion(datosS)
     }
 
@@ -111,7 +111,7 @@ function tomarDatosSesion() {
 
 
 async function llenarTabla() {
-        let result = await fetch('http://localhost:4000/preguntas') 
+    let result = await fetch('http://localhost:4000/preguntas')
     let vectorDeDatos = await result.json()
     let elementosLista = ""
     for (let i = 0; i < vectorDeDatos.length; i++) {
@@ -123,17 +123,17 @@ async function llenarTabla() {
                 <td>${element.id_preguntas}</td>                
                 </tr>
                 `;
-                
+
     }
     document.getElementById('tabla-contenido').innerHTML = elementosLista
 }
-        
+
 async function GetPreguntas() {
     //El get no manda body, si quiero mandar parametros lo sumo a la url con el ?
-    const response = await fetch('http://localhost:4000/preguntas',{
-        method:"GET", //GET, POST, PUT oz DELETE
+    const response = await fetch('http://localhost:4000/preguntas', {
+        method: "GET", //GET, POST, PUT oz DELETE
         headers: {
-        "Content-Type": "application/json",
+            "Content-Type": "application/json",
         },
     })
 
@@ -146,8 +146,8 @@ async function GetPreguntas() {
 
 //Los datos en el post se mandan dentro de un objeto 
 async function PostPreguntas(datos) {
-    const response = await fetch('http://localhost:4000/preguntas',{
-        method:"POST", //GET, POST, PUT o DELETE
+    const response = await fetch('http://localhost:4000/preguntas', {
+        method: "POST", //GET, POST, PUT o DELETE
         headers: {
             "Content-Type": "application/json",
         },
@@ -168,36 +168,18 @@ function DatosPregunta() {
     PostPreguntas(datos)
 }
 
-const selector = document.getElementById('selector-datos');
-const selector2 = document.getElementById('selector-datos2');
-async function cargarSelect() {
-try {
-        let result = await fetch('http://localhost:4000/preguntas') 
-        let resultado = await result.json()
-        selector.innerHTML = '<option value="">Seleccione una pregunta...</option>';
-        selector2.innerHTML = '<option value="">Seleccione un pregunta...</option>';
-        for (let i = 0; i < resultado.length; i++) {
-            const element = resultado[i];
-                selector.innerHTML += `<option value="${element.id_preguntas}">${element.texto_pregunta}</option>`;
-                selector2.innerHTML += `<option value="${element.id_preguntas}">${element.texto_pregunta}</option>`;
-               
-            };
-    } catch (error) {
-    console.log("Error al cargar los datos:", error);
-}} 
-cargarSelect();
 
 async function borrarDatos() {
     let datos = {
-        id:document.getElementById("selector-datos").value,
+        id: document.getElementById("selector-datos").value,
     }
     console.log(datos)
-        const response = await fetch('http://localhost:4000/Preguntas',{
-        method:"DELETE", //GET, POST, PUT o DELETE
+    const response = await fetch('http://localhost:4000/Preguntas', {
+        method: "DELETE", //GET, POST, PUT o DELETE
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(datos) 
+        body: JSON.stringify(datos)
     })
 
     console.log(response)
@@ -209,25 +191,25 @@ async function borrarDatos() {
 async function cambiarDato() {
     let datos = {
         categorias: document.getElementById("botonInputCategorias").value,
-        texto_pregunta:document.getElementById("botonInputTextoregunta").value,
+        texto_pregunta: document.getElementById("botonInputTextoregunta").value,
         id_preguntas: document.getElementById("selector-datos").value,
 
     }
-try {
-        const response = await fetch('http://localhost:4000/Preguntas',{
-        method:"PUT", //GET, POST, PUT o DELETE
-        headers: {
-        "Content-Type": "application/json",
-        },
-        body: JSON.stringify(datos) 
+    try {
+        const response = await fetch('http://localhost:4000/Preguntas', {
+            method: "PUT", //GET, POST, PUT o DELETE
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos)
         })
-    
+
         console.log(response)
         let result = await response.json()
         console.log(result)
-} catch (error) {
-    console.error("Error de red o conexión:", error);
-}
-    
+    } catch (error) {
+        console.error("Error de red o conexión:", error);
+    }
+
 }
 
