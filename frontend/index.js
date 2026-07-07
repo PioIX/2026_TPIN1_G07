@@ -261,3 +261,172 @@ try {
     
 }
 
+
+
+async function PostRespuestas(datos) {
+
+    const response = await fetch('http://localhost:4000/respuestasAgregadas', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datos)
+    });
+
+    console.log(response);
+
+    let result = await response.json();
+    console.log(result);
+
+}
+
+
+async function cargarPreguntasRespuestas() {
+
+    try {
+
+        let result = await fetch('http://localhost:4000/preguntas');
+        let preguntas = await result.json();
+
+        let selectorPregunta = document.getElementById("selectorPregunta");
+
+        selectorPregunta.innerHTML = '<option value="">Seleccione una pregunta</option>';
+
+        for (let i = 0; i < preguntas.length; i++) {
+
+            selectorPregunta.innerHTML += `
+                <option value="${preguntas[i].id_preguntas}">
+                    ${preguntas[i].texto_pregunta}
+                </option>
+            `;
+
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+}
+
+function Iniciar() {
+    llenarTabla();
+    llenarTablaPre();
+    cargarPreguntasRespuestas();
+}
+
+
+async function DatosRespuestas() {
+
+    let correcta = getRespuestaCorrecta();
+
+    let respuestas = [
+
+        {
+            id_preguntas: getPreguntaSeleccionada(),
+            texto_respuesta: ingresoRespuesta1(),
+            es_correcta: correcta == 1 ? 1 : 0
+        },
+
+        {
+            id_preguntas: getPreguntaSeleccionada(),
+            texto_respuesta: ingresoRespuesta2(),
+            es_correcta: correcta == 2 ? 1 : 0
+        },
+
+        {
+            id_preguntas: getPreguntaSeleccionada(),
+            texto_respuesta: ingresoRespuesta3(),
+            es_correcta: correcta == 3 ? 1 : 0
+        },
+
+        {
+            id_preguntas: getPreguntaSeleccionada(),
+            texto_respuesta: ingresoRespuesta4(),
+            es_correcta: correcta == 4 ? 1 : 0
+        }
+
+    ];
+
+    for (let i = 0; i < respuestas.length; i++) {
+
+        await PostRespuestas(respuestas[i]);
+
+    }
+
+    alert("Respuestas agregadas correctamente");
+
+}
+
+
+async function PutRespuesta(datos) {
+
+    const response = await fetch("http://localhost:4000/respuestasModificadas", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(datos)
+    });
+
+    console.log(response);
+
+    let result = await response.json();
+    console.log(result);
+
+    alert(result.message);
+
+}
+
+
+function DatosModificarRespuesta() {
+
+    let datos = {
+
+        id_respuestas: getIdRespuestaModificar(),
+        texto_respuesta: getTextoRespuestaModificar(),
+        es_correcta: getEsCorrectaModificar()
+
+    };
+
+    PutRespuesta(datos);
+
+}
+
+
+async function cargarSelectorRespuestas() {
+
+    try {
+
+        let result = await fetch("http://localhost:4000/respuestaTabla");
+        let respuestas = await result.json();
+
+        let selector = document.getElementById("selectorRespuesta");
+
+        selector.innerHTML = '<option value="">Seleccione una respuesta</option>';
+
+        for (let i = 0; i < respuestas.length; i++) {
+
+            selector.innerHTML += `
+                <option value="${respuestas[i].id_respuestas}">
+                    ${respuestas[i].texto_respuesta}
+                </option>
+            `;
+
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+    }
+
+}
+
+function Iniciar() {
+    llenarTabla();
+    llenarTablaPre();
+    cargarPreguntasRespuestas();
+    cargarSelectorRespuestas();
+}

@@ -90,7 +90,8 @@ app.get("/preguntasAleatorias", async function name(req, res) {
 })
 
 
-// funciones admin
+// FUNCION ADMIN
+
 app.get('/preguntas', async function (req, res) {
     let respuesta;
     if (req.query.id_preguntas != undefined) {
@@ -135,7 +136,6 @@ app.put('/preguntas', function (req, res) {
 })
 
 
-
 app.delete('/preguntas', function (req, res) {
     try {
         console.log(req.body)
@@ -169,3 +169,38 @@ app.get('/respuestaTabla', async function (req, res) {
     }
     res.send(respuesta);
 })
+
+app.post('/respuestasAgregadas', async function (req, res) {
+    try {
+        console.log(req.body); 
+        await realizarQuery(`
+            INSERT INTO Respuestas (id_preguntas, texto_respuesta, es_correcta)
+            VALUES
+            (
+                "${req.body.id_preguntas}",
+                "${req.body.texto_respuesta}",
+                "${req.body.es_correcta}"
+            )
+        `);
+        res.send({ message: "Respuesta agregada" });
+    } catch (error) {
+        res.send({ message: error.message });
+    }
+});
+
+
+app.put("/respuestasModificadas", async function (req, res) {
+    try {
+        console.log(req.body);
+        await realizarQuery(`
+            UPDATE Respuestas SET texto_respuesta = "${req.body.texto_respuesta}", es_correcta = "${req.body.es_correcta}"
+            WHERE id_respuestas = ${req.body.id_respuestas}
+        `);
+
+        res.send({ message: "Respuesta modificada correctamente" });
+
+    } catch (error) {
+        res.send({ message: error.message });
+    }
+});
+
