@@ -118,6 +118,8 @@ async function mostrarPreguntaAleatoria(){
 
 
 function responder(esCorrecta) {
+    let respondidas = parseInt(localStorage.getItem("preguntas_respondidas")) || 0;
+    let categoria_actual = localStorage.getItem("categoria_actual")
     if(esCorrecta === 1 || esCorrecta === true){
         alert("¡Correcto! Respondiste correctamente");
         let respondidas = parseInt(localStorage.getItem("preguntas_respondidas")) || 0;
@@ -127,7 +129,10 @@ function responder(esCorrecta) {
 
         mostrarPreguntaAleatoria();
     }else{
-        alert("Incorrecto. Intenta de nuevo.");
+        alert("Incorrecto. Probemos con otra categoria.");
+        let puntajePorCategoria = JSON.parse(localStorage.getItem("puntajesCategoria")) || {};
+        puntajePorCategoria[categoria_actual] = (puntajePorCategoria[categoria_actual] || 0) + respondidas
+        localStorage.setItem("puntajesCategoria", JSON.stringify(puntajePorCategoria));
         limpiarEfectosJuego();
         window.location.href = "indexRuleta.html";
     }
