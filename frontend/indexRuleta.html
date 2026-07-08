@@ -92,6 +92,12 @@
        let gradosActuales = 0;
         const ruleta = document.getElementById("ruleta");
         const boton = document.getElementById("btnGirar");
+        const todasLasCategorias = ["Geografía", "Ciencia", "Bonus", "Arte", "Deporte", "Historia"];
+       function verificarCategoriaTerminada(categoriaGanadora){
+            let categoriasTerminadas = JSON.parse(localStorage.getItem("categoriasTerminadas")) || [];
+            console.log(categoriasTerminadas)
+            return categoriasTerminadas.includes(categoriaGanadora);
+        }
 
         function girarRuleta() {
             // Deshabilitar botón temporalmente para evitar bugs mientras gira
@@ -100,7 +106,7 @@
             // Generar entre 5 y 9 vueltas completas + un ángulo extra aleatorio
             const vueltas = Math.floor(Math.random() * 5) + 5;
             const gradosExtra = Math.floor(Math.random() * 360);
-
+            
             // Sumar al acumulador para que mantenga la inercia del giro anterior
             gradosActuales += (vueltas * 360) + gradosExtra;
 
@@ -119,7 +125,7 @@
 
             // Evaluar los sectores basándonos en tu diseño original
             if (anguloFinal >= 0 && anguloFinal < 60) {
-                categoriaGanadora = "Geografía";
+                categoriaGanadora = "Geografia";
             } else if (anguloFinal >= 60 && anguloFinal < 120) {
                 categoriaGanadora = "Ciencia";
             } else if (anguloFinal >= 120 && anguloFinal < 180) {
@@ -127,14 +133,31 @@
             } else if (anguloFinal >= 180 && anguloFinal < 240) {
                 categoriaGanadora = "Arte";
             } else if (anguloFinal >= 240 && anguloFinal < 300) {
-                categoriaGanadora = "Deporte";
+                categoriaGanadora = "Deportes";
             } else if (anguloFinal >= 300 && anguloFinal < 360) {
                 categoriaGanadora = "Historia";
             }
-
+            
             console.log("Resultado matemático de detención: " + anguloFinal + "°");
-            confirm("¡Te tocó: " + categoriaGanadora + "!")
-            window.location.href =categoriaGanadora.toLocaleLowerCase() + ".html";
+            let completadas = JSON.parse(localStorage.getItem("categoriasTerminadas")) || [];
+            if(completadas.length >= todasLasCategorias.length){
+                alert("¡Felicidades! Terminaste todas las Categorias.")
+                window.location.href = "puntos.html";
+                return;
+            }
+            // si la categoria que salio esta completada gira otra vez:
+            if(verificarCategoriaTerminada(categoriaGanadora)){
+                console.log("Categoria Repetida: "+ categoriaGanadora + "Girando otra vez..");
+                girarRuleta();
+                return;
+            }
+            boton.disabled = false;
+            localStorage.setItem("categoria_actual",categoriaGanadora);
+            // si la categoria no salio, la jugamos:
+            if(confirm("¡Te tocó: " + categoriaGanadora + "!")){
+                window.location.href =categoriaGanadora.toLocaleLowerCase() + ".html";
+            }
+            
         });
     </script>
 

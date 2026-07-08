@@ -25,16 +25,18 @@ async function iniciarJuegoPorCategoria(categoria) {
     try{
         
         // Hacemos el fetch al endpoint exacto que modificamos:
-        const respuesta =await fetch('http://localhost:4000/Preguntas?categoria=' + categoria);
+        const respuesta =await fetch('http://localhost:4000/preguntasAleatorias?categoria=' + categoria);
         const datos = await respuesta.json();
 
         const vectorPreguntas = datos.preguntas;
+        console.log(vectorPreguntas)
     //'datos.preguntas' trae el vector/arreglo de preguntas de MySQL
     //localStorage.setItem("preguntas", vector)
     // Usamos JSON.stringify porque localStorage solo guarda cadenas de texto plano
         localStorage.setItem("preguntas",JSON.stringify(vectorPreguntas));
+        localStorage.setItem("categoria_actual", categoria);  // guardamos la categoria actual
         // contador de preguntas en 0
-        localStorage.setItem("preguntas_respondidas", "0")
+        
         
         mostrarPreguntaAleatoria();
     }catch(error){
@@ -54,13 +56,15 @@ async function obtenerRespuestasPorPreguntas(idPregunta){
     }
 }
 
-
 async function mostrarPreguntaAleatoria(){
     let listaPreguntas = JSON.parse(localStorage.getItem("preguntas"));  //modifique la mayus de preguntas
-    let respondidas = parseInt(localStorage.getItem("preguntas_respondidas")) && 0;
+    let respondidas = parseInt(localStorage.getItem("preguntas_respondidas")) || 0;
 
-    if(respondidas === 10){
+    if(respondidas == 10){
         alert("Respondiste bien todas las preguntas. Ganaste en esta categoria");
+        let categoriasTerminadas = JSON.parse(localStorage.getItem("categoriasTerminadas")) || [];
+        categoriasTerminadas.push(localStorage.getItem("categoria_actual"));
+        localStorage.setItem("categoriasTerminadas", JSON.stringify(categoriasTerminadas));
         limpiarEfectosJuego();
         window.location.href = "indexRuleta.html";
         return;
@@ -93,7 +97,7 @@ async function mostrarPreguntaAleatoria(){
     // texto de la pregunta en el html
     document.getElementById("pantalla-pregunta").innerText = preguntaActual.texto_pregunta;
 
-    const opciones =await obtenerRespuestasPorPreguntas(preguntaActual.id);
+    const opciones =await obtenerRespuestasPorPreguntas(preguntaActual.id_preguntas);
 
     let botones = document.getElementsByClassName("option-btn")
 
@@ -118,6 +122,7 @@ function responder(esCorrecta) {
         alert("¡Correcto! Respondiste correctamente");
         let respondidas = parseInt(localStorage.getItem("preguntas_respondidas")) || 0;
         respondidas ++;
+        console.log("Preguntas respondidas correctamente: ", respondidas);
         localStorage.setItem("preguntas_respondidas", respondidas.toString());
 
         mostrarPreguntaAleatoria();
@@ -137,5 +142,16 @@ function limpiarEfectosJuego() {
     localStorage.removeItem("preguntas_respondidas");
     localStorage.removeItem("categoria_actual");
 }
-//Hacer la funcion responder
-//Hacer la funcion limpiarElementos
+
+// Funcion para cuando completa el juego, ver si cuando tira la ruleta de nuevo la categoria ya fue completada y no se pueda volver a jugar
+
+function verificarCategoriaTerminada(categoriaGanadora){
+    let categoriasTerminadas = JSON.parse(localStorage.getItem("categoriasTerminadas")) || [];  
+    return categoriasTerminadas.includes(categoriaGanadora);
+}
+
+/*
+TODO:
+Hacer la tablade puntajes, no darle pelota al puntaje maximo de Usuarios
+
+*/

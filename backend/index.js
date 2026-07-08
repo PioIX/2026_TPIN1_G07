@@ -78,9 +78,9 @@ app.get("/preguntasAleatorias", async function name(req, res) {
     try {
         if (req.query.categoria != undefined) {
             let resultado = await realizarQuery(`
-            SELECT * FROM Preguntas WHERE categoria = "${req.query.categoria}"`);
+            SELECT * FROM Preguntas WHERE categorias = "${req.query.categoria}";`);
             let categoria = req.query.categoria;
-            res.send({ preguntas: resultado[0] })
+            res.send({ preguntas: resultado })
         } else {
             res.send({preguntas: [], ok : false})
         }

@@ -76,7 +76,7 @@ async function Sesion(datosS) {
 
     if (result.message === "Inicio de Sesion exitoso") {
         alert("Bienvenido");
-
+        localStorage.setItem("preguntas_respondidas", "0")
         if (result.es_admin) {
             // Si es administrador
             window.location.href = "Admin.html";
