@@ -1,0 +1,152 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+
+    background-image: url(PREGUNTADOS\ \(1\).jpg);
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Fredoka', sans-serif;
+
+
+
+
+}
+
+
+.ranking-container{
+    width: 90%;
+    max-width: 1200px;
+
+    position: relative;
+}
+
+
+.logo{
+    position: absolute;
+
+    width: 140px;
+
+    top: -35px;
+    left: -15px;
+
+    z-index: 2;
+}
+
+
+.title-box{
+    width: 70%;
+
+    margin: 0 auto 20px;
+
+    background: #7760A9;
+
+    border-radius: 30px;
+
+    padding: 20px;
+
+    text-align: center;
+}
+
+.title-box h1{
+    color: white;
+
+    font-size: 4rem;
+    font-weight: 700;
+
+    text-shadow:
+        5px 5px 0 #302049,
+        0 8px 8px rgba(0,0,0,.2);
+}
+
+
+
+.table-container{
+    background: #E8E4D8;
+
+    border: 12px solid #E8E4D8;
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+
+    background: #F5F5F5;
+}
+
+thead{
+    background: #8871BA;
+}
+
+thead th{
+    color: white;
+
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    padding: 20px;
+}
+
+tbody td{
+    text-align: center;
+
+    padding: 25px;
+
+    font-size: 1.6rem;
+    font-weight: 600;
+
+    border: 1px solid #D3CFDA;
+}
+
+
+
+.pink{
+    color: #D0348E;
+}
+
+.green{
+    color: #74D14A;
+}
+
+.yellow{
+    color: #FFB300;
+}
+
+.blue{
+    color: #00C8F3;
+}
+
+@media(max-width:768px){
+
+    .logo{
+        width: 90px;
+        left: 0;
+        top: -20px;
+    }
+
+    .title-box{
+        width: 85%;
+    }
+
+    .title-box h1{
+        font-size: 2rem;
+    }
+
+    thead th,
+    tbody td{
+        font-size: 1rem;
+        padding: 15px 5px;
+    }
+}

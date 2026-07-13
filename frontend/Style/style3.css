@@ -1,0 +1,190 @@
+body {
+    background-image: url(PREGUNTADOS\ \(1\).jpg);
+    font-family: 'Fredoka One', cursive;
+    background-color: #5c3d8f;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* RULETA */
+
+
+
+/*CONTENEDOR PRINCIPAL*/
+.contenedor-principal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* RULETA*/
+
+.ruleta-wrapper {
+    position: relative;
+}
+
+/* FLECHA */
+.ruleta-flecha {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 28px solid transparent;
+    border-right: 28px solid transparent;
+    border-top: 45px solid #ff2a85;
+    z-index: 100;
+}
+
+/* BORDE EXTERIOR */
+.ruleta-borde {
+    width: 470px;
+    height: 470px;
+    border-radius: 50%;
+    background: #9b9488;
+    border: 6px solid #746f67;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow:
+        inset 0 0 15px rgba(0,0,0,.4),
+        0 8px 20px rgba(0,0,0,.3);
+}
+
+/* DISCO DE COLOR */
+.ruleta-disco {
+    position: relative;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #746f67;
+    transition: transform 4s cubic-bezier(.25, 1, .5, 1); 
+    background: conic-gradient(
+        #F9A032  0deg 60deg,
+        #F4DD46  60deg 120deg,
+        #F551B7 120deg 180deg,
+        #9245D7 180deg 240deg,
+        #31D36B 240deg 300deg,
+        #2D7BD8 300deg 360deg
+    );
+}
+
+/* LINEAS DIVISORIAS */
+.ruleta-disco::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(#666, #666) center/4px 100% no-repeat;
+    transform: rotate(0deg);
+    z-index: 2;
+}
+
+.ruleta-disco::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+        transparent 0deg 59deg,
+        #666 59deg 61deg,
+        transparent 61deg 119deg,
+        #666 119deg 121deg,
+        transparent 121deg 179deg,
+        #666 179deg 181deg,
+        transparent 181deg 239deg,
+        #666 239deg 241deg,
+        transparent 241deg 299deg,
+        #666 299deg 301deg,
+        transparent 301deg 359deg,
+        #666 359deg 360deg
+    );
+    z-index: 1;
+}
+
+/* ICONOS (Ubicación circular) */
+.icono {
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    top: 50%;
+    left: 50%;
+    margin-left: -27px;
+    margin-top: -27px;
+    z-index: 5;
+}
+
+.i1 { transform: rotate(30deg) translateY(-145px) rotate(-30deg); }
+.i2 { transform: rotate(90deg) translateY(-145px) rotate(-90deg); }
+.i3 { transform: rotate(150deg) translateY(-145px) rotate(-150deg); }
+.i4 { transform: rotate(210deg) translateY(-145px) rotate(-210deg); }
+.i5 { transform: rotate(270deg) translateY(-145px) rotate(-270deg); }
+.i6 { transform: rotate(330deg) translateY(-145px) rotate(-330deg); }
+
+/*BOTÓN Y PERSONAJE*/
+.zona-boton {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.personaje {
+    width: 70px;
+    margin-right: -10px;
+    z-index: 5;
+}
+
+.btn-pulsar {
+    background: #ff2a85;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    padding: 18px 65px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #d01d6e;
+    transition: transform 0.1s ease;
+}
+
+.btn-reiniciar{
+    background: #ff2a85;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    padding: 18px 65px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #d01d6e;
+    transition: transform 0.1s ease;
+}
+
+.btn-pulsar:hover {
+    transform: scale(1.05);
+}
+
+.btn-pulsar:disabled {
+    background: #ccc;
+    box-shadow: 0 6px 0 #999;
+    cursor: not-allowed;
+}
+
+.btn-reiniciar:hover {
+    transform: scale(1.05);
+}
+
+.btn-reiniciar:disabled {
+    background: #ccc;
+    box-shadow: 0 6px 0 #999;
+    cursor: not-allowed;
+}

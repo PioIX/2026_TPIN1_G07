@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>APP Web</title>
+        <link rel="stylesheet" href="Style/styleAdim.css">    
+    </head>
+    <body onload="Iniciar()">
+        <style> table, th, td{
+        border: 1px solid black;
+        }</style>
+
+        <h1>Tabla Preguntas Para Modificar </h1>  
+        <h1 id="TituloPregunta">Tabla Respuestas Para Modificar</h1>
+    
+    <div class="contenedor-tablas">
+        <table style="width: 100%;">
+            <tr>
+                <th>Categoria</th>
+                <th>Texto Pregunta</th>
+                <th>ID</th>
+            </tr>
+            <tbody id="tabla-contenido"></tbody>
+
+        </table>
+
+        <table style="width: 100%;">
+            <tr>
+                <th>Id_Respuestas</th>
+                <th>Texto Respuestas</th>
+                <th>Es correcto</th>
+                <th>ID</th>
+            </tr>
+            <tbody id="tabla-contenido-Preguntas"></tbody>
+        </table>
+
+    </div>
+
+
+        <h1 id="BaseDatos"> Base de Datos </h1>
+        <button onclick="GetPreguntas()">Llamado Al Backend</button>
+
+        <h2>Agregar una pregunta nueva</h2>
+        <input id="ingresoCategorias" placeholder="ingrese Categoria">
+        <input id="ingresoTextoPregunta" placeholder="ingrese Texto Pregunta">
+        <button onclick="DatosPregunta()">Enviar al POST</button>
+
+        <h2>Seleccione pregunta para agregarle las respuestas</h2>
+
+        <select id="selectorPregunta">
+            <option value="">Seleccione una pregunta</option>
+        </select>
+
+        <br><br>
+
+        <input id="ingresoRespuesta1" placeholder="Ingrese la respuesta 1">
+        <input id="ingresoRespuesta2" placeholder="Ingrese la respuesta 2">
+        <input id="ingresoRespuesta3" placeholder="Ingrese la respuesta 3">
+        <input id="ingresoRespuesta4" placeholder="Ingrese la respuesta 4">
+
+        <br><br>
+
+        <p>Seleccione cuál es la respuesta correcta:</p>
+
+        <input type="radio" name="respuestaCorrecta" value="1">
+        <label>Respuesta 1</label>
+
+        <br>
+
+        <input type="radio" name="respuestaCorrecta" value="2">
+        <label>Respuesta 2</label>
+
+        <br>
+
+        <input type="radio" name="respuestaCorrecta" value="3">
+        <label>Respuesta 3</label>
+
+        <br>
+
+        <input type="radio" name="respuestaCorrecta" value="4">
+        <label>Respuesta 4</label>
+
+        <br><br>
+
+        <button onclick="DatosRespuestas()">Enviar Resuestas al POST</button>       
+
+        <h2>Eliminar Pregunta</h2>
+        <label for="selector-datos">Selecciona un elemento:</label>
+        <select id="selector-datos">
+            <option value="">Seleccione Dato</option>
+        </select>
+
+        <button onclick="borrarDatos()">Eliminar de la base de datos</button>
+
+
+        <h2>Cambiar una pregunta</h2>
+        <label for="selector-datos2">Selecciona un elemento:</label>
+        <select id="selector-datos2">
+            <option value="">Seleccione Dato</option>
+        </select>
+
+        <input type="text" id="botonInputCategorias" placeholder="Escribe CATEGORIA ha cambiar...">
+        <input type="text" id="botonInputTextoregunta" placeholder="Escribe TEXTO DE PREGUNTA ha cambiar...">
+        <button onclick="cambiarDato()">Enviar</button>
+        <br>
+        <h2>Modificar una respuesta</h2>
+
+        <label>Seleccione una respuesta:</label>
+
+        <select id="selectorRespuesta">
+            <option value="">Seleccione una respuesta</option>
+        </select>
+
+        <br><br>
+
+        <input
+            type="text"
+            id="inputModificarRespuesta"
+            placeholder="Ingrese el nuevo texto de la respuesta">
+
+        <br><br>
+
+        <p>¿Esta respuesta será la correcta?</p>
+
+        <input type="radio" name="correctaModificar" value="1">
+        <label>Sí</label>
+
+        <br>
+
+        <input type="radio" name="correctaModificar" value="0">
+        <label>No</label>
+
+        <br><br>
+
+        <button onclick="DatosModificarRespuesta()">
+            Modificar respuesta
+        </button>
+
+    <script src="dom.js"></script>
+    <script src="index.js"> </script>
+
+    </body>
+
+<footer>
+
+    <div class="contenedor-jugar">
+        <a href="indexRuleta.html" class="Jugar">IR AL JUEGO</a>
+    </div>
+
+</footer>
+</html>

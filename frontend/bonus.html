@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus</title>
+    <link rel="stylesheet" href="Style/style-bonus.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@700&display=swap" rel="stylesheet">
+</head>
+<body onload="iniciarJuegoPorCategoria('Bonus')">
+     <div class="game-container">
+        
+        <aside class="sidebar">
+            <h2 class="sidebar-title">PUNTAJE</h2>
+            <div class="score-badge">
+               <span id="contador-puntos" style="font-size: 1.4rem;">0</span> 
+                <span class="texto-pts">Pts</span>
+            </div>
+
+            <div class="stars">
+                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+            </div>
+
+            <p class="sidebar-text">
+                TU OBJETIVO ES LOGRAR LA MAYOR CANTIDAD DE ESTRELLAS POSIBLE, PARA LOGRARLO RESPONDE LAS SIGUIENTES PREGUNTAS
+            </p>
+        </aside>
+
+        <main class="main-card">
+            <h1 class="question-title" id="pantalla-pregunta">¿PREGUNTA?</h1>
+            
+            <div class="options-container">
+                <button class="option-btn">OPCION</button>
+                <button class="option-btn">OPCION</button>
+                <button class="option-btn">OPCION</button>
+                <button class="option-btn">OPCION</button>
+            </div>
+
+            <div class="character-mascot">
+                <img src="Style/Corona-removebg-preview.png" alt="pochoclo">
+            </div>
+        </main>
+
+    </div>
+    <script src="index.js"></script>
+    <script src="juego.js"></script>
+    <script src="dom.js"></script>
+</body>
+</html>
