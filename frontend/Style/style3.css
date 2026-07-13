@@ -15,10 +15,7 @@ body {
 
 
 
-/* =========================
-   CONTENEDOR PRINCIPAL
-========================= */
-
+/*CONTENEDOR PRINCIPAL*/
 .contenedor-principal {
     display: flex;
     flex-direction: column;
@@ -27,9 +24,7 @@ body {
     min-height: 100vh;
 }
 
-/* =========================
-   RULETA
-========================= */
+/* RULETA*/
 
 .ruleta-wrapper {
     position: relative;
@@ -116,9 +111,7 @@ body {
     z-index: 1;
 }
 
-/* =========================
-   ICONOS (Ubicación circular)
-========================= */
+/* ICONOS (Ubicación circular) */
 .icono {
     position: absolute;
     width: 55px;
@@ -137,9 +130,7 @@ body {
 .i5 { transform: rotate(270deg) translateY(-145px) rotate(-270deg); }
 .i6 { transform: rotate(330deg) translateY(-145px) rotate(-330deg); }
 
-/* =========================
-   BOTÓN Y PERSONAJE
-========================= */
+/*BOTÓN Y PERSONAJE*/
 .zona-boton {
     display: flex;
     align-items: center;
@@ -165,11 +156,34 @@ body {
     transition: transform 0.1s ease;
 }
 
+.btn-reiniciar{
+    background: #ff2a85;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    padding: 18px 65px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #d01d6e;
+    transition: transform 0.1s ease;
+}
+
 .btn-pulsar:hover {
     transform: scale(1.05);
 }
 
 .btn-pulsar:disabled {
+    background: #ccc;
+    box-shadow: 0 6px 0 #999;
+    cursor: not-allowed;
+}
+
+.btn-reiniciar:hover {
+    transform: scale(1.05);
+}
+
+.btn-reiniciar:disabled {
     background: #ccc;
     box-shadow: 0 6px 0 #999;
     cursor: not-allowed;

@@ -53,23 +53,32 @@ app.post("/Usuarios", async function (req, res) {
 
 // funcion inicio de sesion 
 
-app.post("/UsuariosSesion", async function(req,res){
+app.post("/UsuariosSesion", async function(req, res){
+    try {
+        console.log("Datos recibidos en sesión:", req.body);
+        let respuesta = await realizarQuery(`
+            SELECT * FROM Usuarios WHERE mail = "${req.body.mail}" AND contraseña = "${req.body.contraseña}";
+        `);
 
-    console.log(req.body)
-    let respuesta = await realizarQuery(`
-    SELECT * FROM Usuarios WHERE  mail = "${req.body.mail}" and contraseña="${req.body.contraseña}";
-        `)
-    if (respuesta.length > 0) {
-        res.send({
-            message: "Inicio de Sesion exitoso",
-            es_admin: respuesta[0].es_admin
-        });
-    } else {
-        res.send({
-            message: "Usuario no existe"
-        });
+        if (respuesta.length > 0) {
+            // Usamos id_usuario en minúsculas porque viene de la tabla Usuarios
+            const idDetectado = respuesta[0].id_usuario; 
+
+            res.send({
+                message: "Inicio de Sesion exitoso",
+                es_admin: respuesta[0].es_admin,
+                id_usuario: idDetectado
+            });
+        } else {
+            res.send({
+                message: "Usuario no existe"
+            });
+        }
+    } catch (error) {
+        console.error("Error en UsuariosSesion:", error);
+        res.status(500).send({ message: "Error interno del servidor", error: error.message });
     }
-})
+});
 
 
 // FUNCION DEL JUEGO 
@@ -89,6 +98,87 @@ app.get("/preguntasAleatorias", async function name(req, res) {
     }
 })
 
+// FUNCION PARA TRAER LOS DATOS DE LAS RESPUETAS COMBINADOS CON EL USER:
+ 
+
+
+app.get("/partida", async function (req, res) {
+    try {
+        const resultado = await realizarQuery(`
+            SELECT 
+                p.id_partida, 
+                u.nombre, 
+                p.preguntas_totales, 
+                p.aciertos, 
+                p.puntaje_maximo 
+            FROM Partida p 
+            INNER JOIN Usuarios u ON p.ID_usuario = u.id_usuario -- p usa MAYÚSCULAS, u usa minúsculas
+            ORDER BY p.puntaje_maximo DESC;
+        `);
+        res.send(resultado);
+    } catch (error) {
+        console.error("Error al obtener la tabla de puntos:", error);
+        res.status(500).send({ message: error.message, error: true });
+    }
+});
+
+// 1. Sumar 1 punto por respuesta correcta
+
+app.post("/sumarPunto", async function (req, res) {
+    try {
+        const { id_usuario } = req.body; // Este viene del front en minúsculas, está bien.
+        
+        // Buscamos usando ID_usuario (mayúsculas) porque es la tabla Partida
+        let partida = await realizarQuery(`SELECT id_partida FROM Partida WHERE ID_usuario = ${id_usuario} LIMIT 1;`);
+
+        if (partida.length > 0) {
+            await realizarQuery(`
+                UPDATE Partida 
+                SET aciertos = aciertos + 1, puntaje_maximo = puntaje_maximo + 1, preguntas_totales = preguntas_totales + 1
+                WHERE ID_usuario = ${id_usuario};
+            `);
+        } else {
+            await realizarQuery(`
+                INSERT INTO Partida (puntaje_maximo, preguntas_totales, aciertos, ID_usuario) 
+                VALUES (1, 1, 1, ${id_usuario});
+            `);
+        }
+        res.send({ ok: true, message: "+1 punto sumado" });
+    } catch (error) {
+        res.status(500).send({ ok: false, message: error.message });
+    }
+});
+
+// 2. Sumar Bonus de Categoría
+app.post("/sumarBonusCategoria", async function (req, res) {
+    try {
+        const { id_usuario } = req.body;
+        
+        await realizarQuery(`
+            UPDATE Partida 
+            SET puntaje_maximo = puntaje_maximo + 10 
+            WHERE ID_usuario = ${id_usuario};
+        `);
+        res.send({ ok: true, message: "+10 puntos de bonus aplicados" });
+    } catch (error) {
+        res.status(500).send({ ok: false, message: error.message });
+    }
+});
+
+// Reiniciar la puntuacion si se desea
+app.post("/reiniciarPuntuacionBD", async function (req, res) {
+    try {
+        const { id_usuario } = req.body;
+        
+        // Ejecutamos el DELETE usando ID_usuario con mayúsculas (como está en tu tabla Partida)
+        await realizarQuery(`DELETE FROM Partida WHERE ID_usuario = ${id_usuario};`);
+        
+        res.send({ ok: true, message: "Puntuación eliminada de la base de datos correctamente" });
+    } catch (error) {
+        console.error("Error en reiniciarPuntuacionBD:", error);
+        res.status(500).send({ ok: false, message: error.message });
+    }
+});
 
 // FUNCION ADMIN
 

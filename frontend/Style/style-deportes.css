@@ -1,6 +1,6 @@
-/* ================================= */
-/*               RESET               */
-/* ================================= */
+
+/*BASICO */
+
 
 * {
     margin: 0;
@@ -8,9 +8,9 @@
     box-sizing: border-box;
 }
 
-/* ================================= */
+
 /*          FONDO GENERAL            */
-/* ================================= */
+
 
 body {
     background-color: #564080;
@@ -22,9 +22,9 @@ body {
     padding: 20px;
 }
 
-/* ================================= */
-/*      CONTENEDOR PRINCIPAL         */
-/* ================================= */
+
+/*CONTENEDOR PRINCIPAL*/
+
 
 .game-container {
     display: flex;
@@ -34,9 +34,8 @@ body {
     align-items: stretch;
 }
 
-/* ================================= */
-/*             SIDEBAR               */
-/* ================================= */
+/* SIDEBAR */
+
 
 .sidebar {
     background-color: #E8DC9A;
@@ -73,10 +72,18 @@ body {
     font-weight: 700;
     line-height: 1.2;
 }
+#contador-puntos{
+    color: #F6A300
+    
+}
+.texto-pts {
+    color: #F6A300; /* Cambiá el color */
+    font-size: 1.4rem; /* Tamaño numero*/
+    margin-left: 5px; /* Le da un pequeño espacio de separación con el número */
+}
 
-/* ================================= */
-/*            MAIN CARD              */
-/* ================================= */
+/*MAIN CARD*/
+
 
 .main-card {
     background-color: #E8DC9A;
@@ -94,20 +101,16 @@ body {
     position: relative;
 }
 
-/* ================================= */
-/*            PREGUNTA               */
-/* ================================= */
 
+/*PREGUNTA */
 .question-title {
     color: #FFFFFF;
     font-size: 3.2rem;
     margin-bottom: 35px;
 }
 
-/* ================================= */
-/*             BOTONES               */
-/* ================================= */
 
+/* BOTONES */
 .options-container {
     width: 100%;
     max-width: 450px;
@@ -143,10 +146,7 @@ body {
     transform: scale(.98);
 }
 
-/* ================================= */
-/*            PERSONAJE              */
-/* ================================= */
-
+/*PERSONAJE*/
 .character-mascot {
    position: fixed;
     left: 0;        /* pegado al borde izquierdo de la pantalla */
@@ -163,10 +163,9 @@ body {
     filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.2));
 }
 
-/* ================================= */
-/*            RESPONSIVE             */
-/* ================================= */
 
+
+/*RESPONSIVE*/
 @media (max-width: 768px) {
 
     .game-container {

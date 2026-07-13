@@ -1,17 +1,11 @@
-/* ================================= */
-/*               RESET               */
-/* ================================= */
-
+/*BASICO*/
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* ================================= */
-/*          FONDO GENERAL            */
-/* ================================= */
-
+/* FONDO GENERAL*/
 body {
     background-color: #564080;
     font-family: 'Fredoka One', 'Quicksand', sans-serif;
@@ -22,10 +16,8 @@ body {
     padding: 20px;
 }
 
-/* ================================= */
-/*      CONTENEDOR PRINCIPAL         */
-/* ================================= */
 
+/*CONTENEDOR PRINCIPAL*/
 .game-container {
     display: flex;
     gap: 30px;
@@ -34,13 +26,12 @@ body {
     align-items: stretch;
 }
 
-/* ================================= */
-/*             SIDEBAR               */
-/* ================================= */
+
+/*SIDEBAR*/
 
 .sidebar {
     background-color: #7ED553;
-    border: 6px solid #08C96E;
+    border: 6px solid #0a814a;
     border-radius: 25px;
 
     width: 25%;
@@ -54,7 +45,7 @@ body {
 }
 
 .sidebar-title {
-    color: #08C96E;
+    color: #0a814a;
     font-size: 2rem;
     margin-bottom: 10px;
 }
@@ -67,20 +58,27 @@ body {
 }
 
 .sidebar-text {
-    color: #08C96E;
+    color: #0a814a;
     font-size: 0.8rem;
     font-family: 'Quicksand', sans-serif;
     font-weight: 700;
     line-height: 1.2;
 }
+#contador-puntos{
+    color: #0a814a
+    
+}
+.texto-pts {
+    color: #0a814a; /* Cambiá el color  */
+    font-size: 1.4rem; /* Tamaño numero*/
+    margin-left: 5px; /* Le da un pequeño espacio de separación con el número */
+}
 
-/* ================================= */
-/*            MAIN CARD              */
-/* ================================= */
 
+/*MAIN CARD*/
 .main-card {
     background-color: #7ED553;
-    border: 6px solid #08C96E;
+    border: 6px solid #0a814a;
     border-radius: 10px;
 
     width: 75%;
@@ -94,9 +92,9 @@ body {
     position: relative;
 }
 
-/* ================================= */
-/*            PREGUNTA               */
-/* ================================= */
+
+/*PREGUNTA*/
+
 
 .question-title {
     color: #FFFFFF;
@@ -104,9 +102,9 @@ body {
     margin-bottom: 35px;
 }
 
-/* ================================= */
-/*             BOTONES               */
-/* ================================= */
+
+/*BOTONES*/
+
 
 .options-container {
     width: 100%;
@@ -119,7 +117,7 @@ body {
 
 .option-btn {
     background-color: #F3F3F3;
-    color: #08C96E;
+    color: #0a814a;
 
     border: none;
     border-radius: 50px;
@@ -132,7 +130,7 @@ body {
     cursor: pointer;
 
     transition: transform .2s ease;
-    box-shadow: 0 5px 0px #08C96E;
+    box-shadow: 0 5px 0px #0a814a;
 }
 
 .option-btn:hover {
@@ -143,10 +141,8 @@ body {
     transform: scale(.98);
 }
 
-/* ================================= */
-/*            PERSONAJE              */
-/* ================================= */
 
+/*PERSONAJE*/
 .character-mascot {
     position: fixed;
     left: 0;        /* pegado al borde izquierdo de la pantalla */
@@ -163,10 +159,8 @@ body {
     filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.2));
 }
 
-/* ================================= */
-/*            RESPONSIVE             */
-/* ================================= */
 
+/*RESPONSIVE*/
 @media (max-width: 768px) {
 
     .game-container {
