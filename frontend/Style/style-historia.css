@@ -1,11 +1,11 @@
-/* --- Reset --- */
+/* Reset */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* --- Fondo general --- */
+/*Fondo general*/
 body {
     background-color: #4a3b75;
     font-family: 'Fredoka One', 'Quicksand', sans-serif;
@@ -16,7 +16,7 @@ body {
     padding: 20px;
 }
 
-/* --- Contenedor principal --- */
+/*Contenedor principal*/
 .game-container {
     display: flex;
     gap: 30px;
@@ -25,9 +25,8 @@ body {
     align-items: stretch;
 }
 
-/* ========================= */
-/*        SIDEBAR           */
-/* ========================= */
+/*SIDEBAR */
+
 .sidebar {
     background: linear-gradient(180deg, #FFA064 0%, #FF8A3D 100%);
     border: 6px solid #FF6A1A;
@@ -61,9 +60,17 @@ body {
     font-weight: 700;
 }
 
-/* ========================= */
-/*        MAIN CARD         */
-/* ========================= */
+#contador-puntos{
+    color: #FF6A1A
+    
+}
+.texto-pts {
+    color: #FF6A1A; /* Cambiá el color */
+    font-size: 1.4rem; /* Tamaño Pts */
+    margin-left: 5px; /*  espacio separación con el número */
+}
+/*  MAIN CARD */
+
 .main-card {
     background: linear-gradient(180deg, #FFA064 0%, #FF8A3D 100%);
     border: 8px solid #FF6A1A;
@@ -86,9 +93,8 @@ body {
     text-shadow: 3px 3px 0px #FF6A1A;
 }
 
-/* ========================= */
-/*        BOTONES           */
-/* ========================= */
+
+/*BOTONES*/
 .options-container {
     width: 100%;
     max-width: 450px;
@@ -120,9 +126,8 @@ body {
     box-shadow: 0 2px 0px #E082B0;
 }
 
-/* ========================= */
-/*        PERSONAJE         */
-/* ========================= */
+
+/*PERSONAJE */
 .character-mascot {
  position: fixed;
     left: 0;        /* pegado al borde izquierdo de la pantalla */
@@ -139,9 +144,11 @@ body {
     filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.2));
 }
 
-/* ========================= */
-/*      RESPONSIVE          */
-/* ========================= */
+
+
+
+
+/*RESPONSIVE*/
 @media (max-width: 768px) {
     .game-container {
         flex-direction: column;

@@ -12,59 +12,75 @@
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-      <div class="ranking-container">
+    <div class="ranking-container">
 
-        <!-- Logo -->
         <img src="Style/images-removebg-preview.png" alt="Logo" class="logo">
 
-        <!-- Título -->
         <div class="title-box">
             <h1>TABLA DE PUNTOS</h1>
         </div>
 
-        <!-- Tabla -->
         <div class="table-container">
 
             <table>
-
                 <thead>
                     <tr>
+                        <th>N° Partida</th>
                         <th>Jugador</th>
-                        <th>Cantidad de Partidas</th>
-                        <th>Puntaje Total</th>
+                        <th>Preguntas Totales</th>
+                        <th>Aciertos</th>
+                        <th>Puntaje Máximo</th>
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr>
-                        <td class="pink">nombre</td>
-                        <td class="pink">9</td>
-                        <td class="pink">250</td>
-                    </tr>
-
-                    <tr>
-                        <td class="green">nombre</td>
-                        <td class="green">5</td>
-                        <td class="green">100</td>
-                    </tr>
-
-                    <tr>
-                        <td class="yellow">nombre</td>
-                        <td class="yellow">15</td>
-                        <td class="yellow">525</td>
-                    </tr>
-
-                    <tr>
-                        <td class="blue">nombre</td>
-                        <td class="blue">4</td>
-                        <td class="blue">84</td>
-                    </tr>
-                </tbody>
-
+                <tbody id="cuerpo-tabla">
+                    </tbody>
             </table>
 
         </div>
 
     </div>
+
+    <script>
+        window.onload = function() {
+            cargarTablaPuntos();
+        };
+
+        async function cargarTablaPuntos() {
+            try {
+                
+                const respuesta = await fetch('http://localhost:4000/Partida');
+                const partidas = await respuesta.json();
+
+                const cuerpoTabla = document.getElementById("cuerpo-tabla");
+                cuerpoTabla.innerHTML = ""; 
+
+                
+                const colores = ["pink", "green", "yellow", "blue"];
+
+                // Recorremos los datos que vinieron de la base de datos
+                partidas.forEach((partida, index) => {
+                    
+                    const claseColor = colores[index % colores.length];
+
+                    // Creamos la fila con todas las columnas 
+                    const fila = document.createElement("tr");
+                    fila.innerHTML = `
+                        <td class="${claseColor}">${partida.id_partida}</td>
+                        <td class="${claseColor}">${partida.nombre}</td>
+                        <td class="${claseColor}">${partida.preguntas_totales}</td>
+                        <td class="${claseColor}">${partida.aciertos}</td>
+                        <td class="${claseColor}">${partida.puntaje_maximo}</td>
+                    `;
+
+                    // Insertamos la fila en el cuerpo de la tabla
+                    cuerpoTabla.appendChild(fila);
+                });
+
+            } catch (error) {
+                console.error("Error al cargar los datos de la tabla:", error);
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-/* --- Reseteo y Estilos Generales --- */
+/* Estilos Generales  */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,7 +15,7 @@ body {
     padding: 20px;
 }
 
-/* --- Contenedor Principal --- */
+/*  Contenedor Principal  */
 .game-container {
     display: flex;
     gap: 30px;
@@ -25,7 +25,7 @@ body {
     position: relative;
 }
 
-/* --- Panel de Puntaje (Izquierdo) --- */
+/* Panel de Puntaje (Izquierdo)*/
 .sidebar {
     background-color: #fca1cc; /* Rosa claro */
     border: 5px solid #ff4fa8; /* Borde rosa fuerte */
@@ -60,8 +60,18 @@ body {
     font-family: 'Quicksand', sans-serif;
     font-weight: 700;
 }
+#contador-puntos{
+    color: #ff4fa8
+    
+}
+.texto-pts {
+    color: #ff4fa8; /* Cambiá el color */
+    font-size: 1.4rem; /* Tamaño numero */
+    margin-left: 5px; /* Le da un pequeño espacio de separación con el número */
+}
 
-/* --- Panel de Trivia (Derecho) --- */
+
+/* Panel de Trivia (Derecho) */
 .main-card {
     background-color: #fca1cc;
     border: 8px solid #ff4fa8;
@@ -84,7 +94,7 @@ body {
     letter-spacing: 2px;
 }
 
-/* --- Contenedor de Botones --- */
+/*Contenedor de Botones */
 .options-container {
     width: 100%;
     max-width: 500px;
@@ -118,7 +128,7 @@ body {
     box-shadow: 0 2px 0px #e082b0;
 }
 
-/* --- Mascota / Personaje --- */
+/*Personaje */
 .character-mascot {
  position: fixed;
     left: 0;        /* pegado al borde izquierdo de la pantalla */
@@ -134,7 +144,12 @@ body {
     filter: drop-shadow(3px 3px 0px rgba(0,0,0,0.2));
 }
 
-/* --- Adaptación para pantallas pequeñas (Celulares) --- */
+
+
+
+
+
+/*RESPONSIVE*/
 @media (max-width: 768px) {
     .game-container {
         flex-direction: column;
