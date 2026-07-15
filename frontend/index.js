@@ -18,28 +18,38 @@ async function llamadoAlGet() {
 
 //Los datos en el post se mandan dentro de un objeto 
 async function llamadoAlPost(datos) {
-    const response = await fetch('http://localhost:4000/Usuarios', {
-        method: "POST", //GET, POST, PUT o DELETE
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(datos) //JSON.stringify convierte de objeto a JSON
-    })
+    try {
+        const response = await fetch('http://localhost:4000/Usuarios', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(datos)
+        });
 
-    console.log(response)
-    //Desarma el json y lo arma como un objeto
-    let result = await response.json()
-    console.log(result)
+        console.log(response);
+        let result = await response.json();
+        console.log(result);
 
+        if (result.ok || result.message === "Usuario Agregado") {
+            alert("Registro exitoso");
 
-    if (result.message === "Usuario Agregado") {
-        alert("Registro exitoso");
-        window.location.href = "indexRuleta.html"; 
-    } else {
-        alert(result.message);
+            // Guardamos el ID en el localStorage
+            localStorage.setItem("ID_usuario", result.id_usuario);
+            localStorage.setItem("preguntas_respondidas", "0");
+            
+            // --- INICIALIZACIÓN CLAVE PARA EL BLOQUEO ---
+            localStorage.setItem("categoriasTerminadas", JSON.stringify([]));
+            localStorage.setItem("categoriasBloqueadas", JSON.stringify([]));
+
+            window.location.href = "indexRuleta.html"; 
+        } else {
+            alert(result.message);
+        }
+    } catch (error) {
+        console.error("Error al registrar usuario en el frontend:", error);
+        alert("Ocurrió un error al intentar conectarse con el servidor.");
     }
-    
-
 }
 
 function tomarDatos() {
@@ -200,8 +210,7 @@ function DatosPregunta() {
     PostPreguntas(datos)
 }
 
-const selector = document.getElementById('selector-datos');
-const selector2 = document.getElementById('selector-datos2');
+
 
 async function cargarSelect() {
     try {
