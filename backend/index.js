@@ -44,9 +44,13 @@ app.post("/Usuarios", async function (req, res) {
     if (respuesta.length > 0) {
         res.send({ message: "El usuario ya existe" })
     } else {
-        realizarQuery(`INSERT INTO Usuarios(nombre, mail, contraseña) VALUES
-             ("${req.body.nombre}","${req.body.mail}","${req.body.contraseña}")`)
-        res.send({ message: "Usuario Agregado" })
+        let resultado= await realizarQuery(`INSERT INTO Usuarios(nombre, mail, contraseña,es_admin) VALUES ("${req.body.nombre}","${req.body.mail}","${req.body.contraseña}", 0);`)
+        
+        const nuevoId = resultado.insertId; // Obtener el ID del nuevo usuario insertado
+        console.log("Nuevo usuario agregado con ID:", nuevoId);
+        res.send({ ok: true,
+                message: "Usuario Agregado", 
+                id_usuario: nuevoId })
     }
 })
 
