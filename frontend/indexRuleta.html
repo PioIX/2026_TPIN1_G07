@@ -123,7 +123,7 @@
             if(verificarCategoriaNoDisponible(categoriaGanadora)){
                 console.log("Categoría no disponible: " + categoriaGanadora + ". Re-girando...");
                 girarRuleta(); 
-                return; // 👈 Evita que continúe y muestre el confirm de abajo
+                return; //  Evita que continúe y muestre el confirm de abajo
             }
             
             localStorage.setItem("categoria_actual", categoriaGanadora);
