@@ -58,14 +58,19 @@
         const ruleta = document.getElementById("ruleta");
         const boton = document.getElementById("btnGirar");
         
-        // Nombres normalizados para que coincidan con la lógica matemática
+        // Nombres normalizados
         const todasLasCategorias = ["Geografia", "Ciencia", "Bonus", "Arte", "Deporte", "Historia"];
 
+        // Compara todo en minúsculas de forma segura
         function verificarCategoriaNoDisponible(categoriaGanadora){
             let terminadas = JSON.parse(localStorage.getItem("categoriasTerminadas")) || [];
             let bloqueadas = JSON.parse(localStorage.getItem("categoriasBloqueadas")) || [];
 
-            return terminadas.includes(categoriaGanadora) || bloqueadas.includes(categoriaGanadora);
+            let terminadasMin = terminadas.map(c => c.toLowerCase());
+            let bloqueadasMin = bloqueadas.map(c => c.toLowerCase());
+            let ganadoraMin = categoriaGanadora.toLowerCase();
+
+            return terminadasMin.includes(ganadoraMin) || bloqueadasMin.includes(ganadoraMin);
         }
 
         function girarRuleta() {
@@ -91,7 +96,7 @@
             } else if (anguloFinal >= 120 && anguloFinal < 180) {
                 categoriaGanadora = "Bonus";
             } else if (anguloFinal >= 180 && anguloFinal < 240) {
-                categoriaGanadora = "Arte";
+                categoriaGanadora = "Arte"; // Cambiar por "Cine" si tu archivo es cine.html
             } else if (anguloFinal >= 240 && anguloFinal < 300) {
                 categoriaGanadora = "Deporte";
             } else if (anguloFinal >= 300 && anguloFinal < 360) {
@@ -103,8 +108,10 @@
             let terminadas = JSON.parse(localStorage.getItem("categoriasTerminadas")) || [];
             let bloqueadas = JSON.parse(localStorage.getItem("categoriasBloqueadas")) || [];
             
-            // Unión sin duplicados usando el objeto Set correcto
-            let todasLasJugadas = [...new Set([...terminadas, ...bloqueadas])];
+            let todasLasJugadas = [...new Set([
+                ...terminadas.map(c => c.toLowerCase()), 
+                ...bloqueadas.map(c => c.toLowerCase())
+            ])];
 
             if(todasLasJugadas.length >= todasLasCategorias.length){
                 alert("¡Felicidades! Ya jugaste todas las categorías posibles.");
@@ -112,10 +119,11 @@
                 return;
             }
 
+            // --- CORRECCIÓN CRUCIAL CON EL RETURN ---
             if(verificarCategoriaNoDisponible(categoriaGanadora)){
-                console.log("Categoría no disponible (ya fue jugada): " + categoriaGanadora + ". Girar nuevamente...");
-                girarRuleta();
-                return;
+                console.log("Categoría no disponible: " + categoriaGanadora + ". Re-girando...");
+                girarRuleta(); 
+                return; // 👈 Evita que continúe y muestre el confirm de abajo
             }
             
             localStorage.setItem("categoria_actual", categoriaGanadora);
@@ -125,39 +133,36 @@
             }
         });
 
-async function reiniciarPartida() {
-    let confirmar = confirm("¿Estás seguro de que quieres borrar tu progreso de categorías y REINICIAR TU PUNTUACIÓN a cero?");
-    
-    if (confirmar) {
-        const idUsuario = localStorage.getItem("ID_usuario");
+        async function reiniciarPartida() {
+            let confirmar = confirm("¿Estás seguro de que quieres borrar tu progreso de categorías y REINICIAR TU PUNTUACIÓN a cero?");
+            
+            if (confirmar) {
+                const idUsuario = localStorage.getItem("ID_usuario");
 
-        // Si el usuario está logueado, le pegamos al backend para que borre los puntos
-        if (idUsuario) {
-            try {
-                await fetch('http://localhost:4000/reiniciarPuntuacionBD', {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ id_usuario: idUsuario })
-                });
-            } catch (error) {
-                console.error("Error al conectar con el servidor para reiniciar puntos:", error);
+                if (idUsuario) {
+                    try {
+                        await fetch('http://localhost:4000/reiniciarPuntuacionBD', {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ id_usuario: idUsuario })
+                        });
+                    } catch (error) {
+                        console.error("Error al conectar con el servidor:", error);
+                    }
+                }
+
+                localStorage.setItem("categoriasTerminadas", JSON.stringify([]));
+                localStorage.setItem("categoriasBloqueadas", JSON.stringify([]));
+                localStorage.removeItem("preguntas_respondidas");
+                localStorage.removeItem("categoria_actual");
+                localStorage.removeItem("preguntas");
+                
+                alert("¡Historial y puntuación reiniciados con éxito!");
+                window.location.reload(); 
             }
         }
-
-        // Limpiamos el almacenamiento local del navegador para la ruleta
-        localStorage.removeItem("categoriasTerminadas");
-        localStorage.removeItem("categoriasBloqueadas");
-        localStorage.removeItem("preguntas_respondidas");
-        localStorage.removeItem("categoria_actual");
-        localStorage.removeItem("preguntas");
-        
-        alert("¡Historial y puntuación reiniciados con éxito!");
-        window.location.reload(); // Recarga la ruleta para que empiece de cero
-    }
-}
-</script>
     </script>
 
 </body>
